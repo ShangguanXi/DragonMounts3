@@ -1,0 +1,29 @@
+{
+  "itemGroup.main_tab" : "龙骑士",
+  "itemGroup.armory_tab" : "龙骑士模组相关物品",
+
+  "dragon.forest" : "森林",
+  "dragon.forest2" : "森林",
+  "dragon.aether" : "以太",
+  "dragon.ice" : "冰属",
+  "dragon.sylphid" : "水属",
+  "dragon.water" : "水属",
+  "dragon.fire" : "火属",
+  "dragon.fire2" : "火属",
+  "dragon.skeleton" : "骷髅",
+  "dragon.wither" : "凋灵",
+  "dragon.nether" : "地狱",
+  "dragon.nether2" : "地狱",
+  "dragon.end" : "末影",
+  "dragon.ender" : "末影",
+  "dragon.enchant" : "魔法",
+  "dragon.sunlight" : "日光",
+  "dragon.sunlight2" : "日光",
+  "dragon.moonlight" : "月光",
+  "dragon.storm" : "风暴",
+  "dragon.storm2" : "风暴",
+  "dragon.zombie" : "僵尸",
+  "dragon.terra" : "土属",
+  "dragon.terra2" : "土属"
+
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "dragonmounts3",
+  "version": "${version}",
+  "name": "DragonMounts3",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/DragonMounts/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.dragonmounts.client.DragonMounts3Client"
+    ],
+    "main": [
+      "net.dragonmounts.DragonMounts3Main"
+    ]
+  },
+  "mixins": [
+    "DragonMounts3.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}
