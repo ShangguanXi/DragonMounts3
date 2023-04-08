@@ -35,6 +35,6 @@ public class WaterMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.water_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.water_dragon_scales);
     }
 }

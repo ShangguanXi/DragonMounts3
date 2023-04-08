@@ -35,6 +35,6 @@ public class AetherMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.aether_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.aether_dragon_scales);
     }
 }

@@ -35,6 +35,6 @@ public class ZombieMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.zombie_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.zombie_dragon_scales);
     }
 }

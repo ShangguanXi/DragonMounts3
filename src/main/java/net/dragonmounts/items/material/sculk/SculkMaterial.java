@@ -35,6 +35,6 @@ public class SculkMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.sculk_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.sculk_dragon_scales);
     }
 }

@@ -10,5 +10,5 @@ import net.minecraft.util.Identifier;
 public class DragonMountsGroup {
     public static final ItemGroup ItemsGroup = FabricItemGroupBuilder.create(
                     new Identifier("dragonmounts", "items"))
-            .icon(() -> new ItemStack(DragonScalesItems.aether_dragonscales)).build();
+            .icon(() -> new ItemStack(DragonScalesItems.aether_dragon_scales)).build();
 }

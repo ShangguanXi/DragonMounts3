@@ -35,6 +35,6 @@ public class IceMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.ice_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.ice_dragon_scales);
     }
 }

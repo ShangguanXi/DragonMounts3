@@ -35,6 +35,6 @@ public class FireMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.fire_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.fire_dragon_scales);
     }
 }

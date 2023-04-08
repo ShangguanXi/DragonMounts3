@@ -35,6 +35,6 @@ public class NetherMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.nether_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.nether_dragon_scales);
     }
 }

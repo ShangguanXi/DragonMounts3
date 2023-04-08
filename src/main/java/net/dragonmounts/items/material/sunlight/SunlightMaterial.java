@@ -35,6 +35,6 @@ public class SunlightMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.sunlight_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.sunlight_dragon_scales);
     }
 }

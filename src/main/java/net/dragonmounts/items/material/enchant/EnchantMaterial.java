@@ -35,6 +35,6 @@ public class EnchantMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.enchant_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.enchant_dragon_scales);
     }
 }

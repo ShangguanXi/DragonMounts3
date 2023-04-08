@@ -35,6 +35,6 @@ public class MoonlightMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.moonlight_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.moonlight_dragon_scales);
     }
 }

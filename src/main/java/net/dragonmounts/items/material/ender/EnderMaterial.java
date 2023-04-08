@@ -35,6 +35,6 @@ public class EnderMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.ender_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.ender_dragon_scales);
     }
 }

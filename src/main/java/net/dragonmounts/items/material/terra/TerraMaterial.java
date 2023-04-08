@@ -35,6 +35,6 @@ public class TerraMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.terra_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.terra_dragon_scales);
     }
 }

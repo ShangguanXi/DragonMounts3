@@ -35,6 +35,6 @@ public class ForestMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.forest_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.forest_dragon_scales);
     }
 }

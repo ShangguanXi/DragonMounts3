@@ -35,6 +35,6 @@ public class StormMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(DragonScalesItems.storm_dragonscales);
+        return Ingredient.ofItems(DragonScalesItems.storm_dragon_scales);
     }
 }
