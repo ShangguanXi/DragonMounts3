@@ -2,42 +2,27 @@ package net.dragonmounts.items;
 
 import net.dragonmounts.group.DragonMountsGroup;
 import net.dragonmounts.items.material.DragonHoe;
-import net.dragonmounts.items.material.aether.AetherMaterial;
-import net.dragonmounts.items.material.enchant.EnchantMaterial;
-import net.dragonmounts.items.material.ender.EnderMaterial;
-import net.dragonmounts.items.material.fire.FireMaterial;
-import net.dragonmounts.items.material.forest.ForestMaterial;
-import net.dragonmounts.items.material.ice.IceMaterial;
-import net.dragonmounts.items.material.moonlight.MoonlightMaterial;
-import net.dragonmounts.items.material.nether.NetherMaterial;
-import net.dragonmounts.items.material.sculk.SculkMaterial;
-import net.dragonmounts.items.material.storm.StormMaterial;
-import net.dragonmounts.items.material.sunlight.SunlightMaterial;
-import net.dragonmounts.items.material.terra.TerraMaterial;
-import net.dragonmounts.items.material.water.WaterMaterial;
-import net.dragonmounts.items.material.zombie.ZombieMaterial;
+import net.dragonmounts.items.material.DragonToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ToolItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class DragonHoeItems {
-    public static ToolItem aether_dragon_hoe= new DragonHoe(AetherMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem enchant_dragon_hoe= new DragonHoe(EnchantMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem ender_dragon_hoe= new DragonHoe(EnderMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem fire_dragon_hoe= new DragonHoe(FireMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem forest_dragon_hoe= new DragonHoe(ForestMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem ice_dragon_hoe= new DragonHoe(IceMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem moonlight_dragon_hoe= new DragonHoe(MoonlightMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem nether_dragon_hoe= new DragonHoe(NetherMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem sculk_dragon_hoe= new DragonHoe(SculkMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem storm_dragon_hoe= new DragonHoe(StormMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem sunlight_dragon_hoe= new DragonHoe(SunlightMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem terra_dragon_hoe= new DragonHoe(TerraMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-    public static ToolItem water_dragon_hoe= new DragonHoe(WaterMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
-
-    public static ToolItem zombie_dragon_hoe= new DragonHoe(ZombieMaterial.INSTANCE, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem aether_dragon_hoe= new DragonHoe(DragonToolMaterial.Aether, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem enchant_dragon_hoe= new DragonHoe(DragonToolMaterial.Enchant, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem ender_dragon_hoe= new DragonHoe(DragonToolMaterial.Ender, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem fire_dragon_hoe= new DragonHoe(DragonToolMaterial.Fire, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem forest_dragon_hoe= new DragonHoe(DragonToolMaterial.Forest, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem ice_dragon_hoe= new DragonHoe(DragonToolMaterial.Ice, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem moonlight_dragon_hoe= new DragonHoe(DragonToolMaterial.Moonlight, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem nether_dragon_hoe= new DragonHoe(DragonToolMaterial.Nether, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem sculk_dragon_hoe= new DragonHoe(DragonToolMaterial.Sculk, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem storm_dragon_hoe= new DragonHoe(DragonToolMaterial.Storm, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem sunlight_dragon_hoe= new DragonHoe(DragonToolMaterial.Sunlight, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem terra_dragon_hoe= new DragonHoe(DragonToolMaterial.Terra, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem water_dragon_hoe= new DragonHoe(DragonToolMaterial.Water, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+    public static ToolItem zombie_dragon_hoe= new DragonHoe(DragonToolMaterial.Zombie, -3, 0, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
     public static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier("dragonmounts", "aether_dragon_hoe"), aether_dragon_hoe);
         Registry.register(Registry.ITEM, new Identifier("dragonmounts", "enchant_dragon_hoe"), enchant_dragon_hoe);
