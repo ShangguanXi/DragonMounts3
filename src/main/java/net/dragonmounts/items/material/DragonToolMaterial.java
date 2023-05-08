@@ -1,11 +1,18 @@
 package net.dragonmounts.items.material;
 
 import net.dragonmounts.items.DragonScalesItems;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Lazy;
+import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public enum DragonToolMaterial implements ToolMaterial {
