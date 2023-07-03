@@ -6,6 +6,7 @@ import net.dragonmounts.client.itemAnim.DragonShieldAnim;
 import net.dragonmounts.client.models.DragonEggEntityModel;
 import net.dragonmounts.client.renders.AetherDragonEggEntityRenderer;
 import net.dragonmounts.entities.DragonEggs;
+import net.dragonmounts.entities.Dragons;
 import net.dragonmounts.entities.dragonEggs.AetherDragonEggEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -21,5 +22,6 @@ public class DragonMounts3Client implements ClientModInitializer {
         DragonEggs.registerEntityRenderer();
         DragonBowAnim.register();
         DragonShieldAnim.register();
+        Dragons.registerEntityRenderer();
     }
 }

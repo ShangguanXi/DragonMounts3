@@ -1,16 +1,17 @@
-/*package net.dragonmounts.formatting;
+package net.dragonmounts.formatting;
 
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public enum DragonFormatting {
+public enum DragonFormatting implements StringIdentifiable {
     Aether("Aether", '0', 0, 0X0294BD),
     Enchant("Enchant", '1', 1, 0X8359AE),
     Ender("Ender", '2', 2, 0XAB39BE),
@@ -54,7 +55,7 @@ public enum DragonFormatting {
         this.modifier = modifier;
         this.colorIndex = colorIndex;
         this.colorValue = colorValue;
-        this.stringValue = "§" + code;
+        this.stringValue = "#" + code;
     }
 
     public int getColorIndex() {
@@ -133,4 +134,9 @@ public enum DragonFormatting {
 
         return list;
     }
-}*/
+
+    @Override
+    public String asString() {
+        return null;
+    }
+}
