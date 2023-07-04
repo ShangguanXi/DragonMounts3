@@ -1,4 +1,4 @@
-package net.dragonmounts.client.renders;
+package net.dragonmounts.client.renders.aetherDragon;
 
 import net.dragonmounts.client.models.DragonDefaultModel;
 import net.dragonmounts.client.models.DragonEggEntityModel;

@@ -1,8 +1,6 @@
 package net.dragonmounts.entities;
 
-import net.dragonmounts.client.renders.AetherDragonEggEntityRenderer;
-import net.dragonmounts.client.renders.AetherDragonEntityRenderer;
-import net.dragonmounts.entities.dragonEggs.AetherDragonEggEntity;
+import net.dragonmounts.client.renders.aetherDragon.AetherDragonEntityRenderer;
 import net.dragonmounts.entities.dragons.AetherDragonEntity;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
