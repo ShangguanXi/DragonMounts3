@@ -2,6 +2,7 @@ package net.dragonmounts;
 
 import net.dragonmounts.blocks.DragonEggBlocks;
 import net.dragonmounts.entities.DragonEggs;
+import net.dragonmounts.entities.Dragons;
 import net.dragonmounts.items.*;
 import net.fabricmc.api.ModInitializer;
 
@@ -20,6 +21,7 @@ public class DragonMounts3Main implements ModInitializer {
         DragonBowItems.registerItems();
         DragonShieldItems.registerItems();
         DragonEggs.registerEntityAttributes();
+        Dragons.registerEntityAttributes();
 
     }
 }

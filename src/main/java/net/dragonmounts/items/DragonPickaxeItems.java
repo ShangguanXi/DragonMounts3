@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class DragonPickaxeItems {
-    public static ToolItem aether_dragon_pickaxe = new DragonPickaxe(DragonToolMaterial.Aether, -1, -2.4F, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
+        public static ToolItem aether_dragon_pickaxe = new DragonPickaxe(DragonToolMaterial.Aether, -1, -2.4F, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
     public static ToolItem enchant_dragon_pickaxe = new DragonPickaxe(DragonToolMaterial.Enchant, -1, -2.4F, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
     public static ToolItem ender_dragon_pickaxe = new DragonPickaxe(DragonToolMaterial.Ender, -1, -2.4F, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
     public static ToolItem fire_dragon_pickaxe = new DragonPickaxe(DragonToolMaterial.Fire, -1, -2.4F, new Item.Settings().group(DragonMountsGroup.ItemsGroup));
