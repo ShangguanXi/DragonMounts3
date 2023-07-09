@@ -190,5 +190,16 @@
   "item.dragonmounts.dragonarmor_diamond":"钻石 龙铠",
   "item.dragonmounts.dragonarmor_netherite":"下界合金 龙铠",
   "entity.dragonmounts.aether_dragon": "天境龙",
-  "entity.dragonmounts.enchant_dragon": "魔法龙"
+  "entity.dragonmounts.enchant_dragon": "魔法龙",
+  "entity.dragonmounts.ender_dragon": "末影龙",
+  "entity.dragonmounts.fire_dragon": "火龙",
+  "entity.dragonmounts.ice_dragon": "冰龙",
+  "entity.dragonmounts.moonlight_dragon": "月光龙",
+  "entity.dragonmounts.nether_dragon": "下界龙",
+  "entity.dragonmounts.skeleton_dragon": "骷髅龙",
+  "entity.dragonmounts.storm_dragon": "风暴龙",
+  "entity.dragonmounts.terra_dragon": "土龙",
+  "entity.dragonmounts.water_dragon": "水龙",
+  "entity.dragonmounts.wither_dragon": "凋零龙",
+  "entity.dragonmounts.zombie_dragon": "僵尸龙"
 }

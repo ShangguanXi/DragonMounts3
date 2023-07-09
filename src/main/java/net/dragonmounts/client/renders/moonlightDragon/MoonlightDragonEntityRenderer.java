@@ -2,13 +2,14 @@ package net.dragonmounts.client.renders.moonlightDragon;
 
 import net.dragonmounts.client.models.DragonDefaultModel;
 import net.dragonmounts.entities.dragons.AetherDragonEntity;
+import net.dragonmounts.entities.dragons.MoonlightDragonEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
-public class MoonlightDragonEntityRenderer extends MobEntityRenderer<AetherDragonEntity, DragonDefaultModel<AetherDragonEntity>> {
+public class MoonlightDragonEntityRenderer extends MobEntityRenderer<MoonlightDragonEntity, DragonDefaultModel<MoonlightDragonEntity>> {
 
-    private static final Identifier TEXTURE = new Identifier("textures/entity/aether_dragon/aether_dragon.png");
+    private static final Identifier TEXTURE = new Identifier("textures/entity/moonlight_dragon/moonlight_dragon.png");
 
     public MoonlightDragonEntityRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher, new DragonDefaultModel<>(), 0.5f);
@@ -17,7 +18,7 @@ public class MoonlightDragonEntityRenderer extends MobEntityRenderer<AetherDrago
     }
 
     @Override
-    public Identifier getTexture(AetherDragonEntity entity) {
+    public Identifier getTexture(MoonlightDragonEntity entity) {
         return TEXTURE;
     }
 }

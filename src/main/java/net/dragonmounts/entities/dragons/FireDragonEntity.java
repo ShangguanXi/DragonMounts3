@@ -7,8 +7,8 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.HorseBaseEntity;
 import net.minecraft.world.World;
 
-public class EnchantDragonEntity extends HorseBaseEntity {
-    public EnchantDragonEntity(EntityType<? extends HorseBaseEntity> entityType, World world) {
+public class FireDragonEntity extends HorseBaseEntity {
+    public FireDragonEntity(EntityType<? extends HorseBaseEntity> entityType, World world) {
         super(entityType, world);
     }
 

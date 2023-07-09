@@ -2,13 +2,14 @@ package net.dragonmounts.client.renders.witherDragon;
 
 import net.dragonmounts.client.models.DragonDefaultModel;
 import net.dragonmounts.entities.dragons.AetherDragonEntity;
+import net.dragonmounts.entities.dragons.WitherDragonEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
-public class WitherDragonEntityRenderer extends MobEntityRenderer<AetherDragonEntity, DragonDefaultModel<AetherDragonEntity>> {
+public class WitherDragonEntityRenderer extends MobEntityRenderer<WitherDragonEntity, DragonDefaultModel<WitherDragonEntity>> {
 
-    private static final Identifier TEXTURE = new Identifier("textures/entity/aether_dragon/aether_dragon.png");
+    private static final Identifier TEXTURE = new Identifier("textures/entity/wither_dragon/wither_dragon.png");
 
     public WitherDragonEntityRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher, new DragonDefaultModel<>(), 0.5f);
@@ -17,7 +18,7 @@ public class WitherDragonEntityRenderer extends MobEntityRenderer<AetherDragonEn
     }
 
     @Override
-    public Identifier getTexture(AetherDragonEntity entity) {
+    public Identifier getTexture(WitherDragonEntity entity) {
         return TEXTURE;
     }
 }

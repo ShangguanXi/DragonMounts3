@@ -1,14 +1,14 @@
 package net.dragonmounts.client.renders.forestDragon;
 
 import net.dragonmounts.client.models.DragonDefaultModel;
-import net.dragonmounts.entities.dragons.AetherDragonEntity;
+import net.dragonmounts.entities.dragons.ForestDragonEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
-public class ForestDragonEntityRenderer extends MobEntityRenderer<AetherDragonEntity, DragonDefaultModel<AetherDragonEntity>> {
+public class ForestDragonEntityRenderer extends MobEntityRenderer<ForestDragonEntity, DragonDefaultModel<ForestDragonEntity>> {
 
-    private static final Identifier TEXTURE = new Identifier("textures/entity/aether_dragon/aether_dragon.png");
+    private static final Identifier TEXTURE = new Identifier("textures/entity/forest_dragon/forest_dragon.png");
 
     public ForestDragonEntityRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher, new DragonDefaultModel<>(), 0.5f);
@@ -17,7 +17,7 @@ public class ForestDragonEntityRenderer extends MobEntityRenderer<AetherDragonEn
     }
 
     @Override
-    public Identifier getTexture(AetherDragonEntity entity) {
+    public Identifier getTexture(ForestDragonEntity entity) {
         return TEXTURE;
     }
 }
