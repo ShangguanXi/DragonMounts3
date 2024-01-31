@@ -96,7 +96,8 @@ public class DragonDefaultModel<T extends Entity> extends EntityModel<T> {
     private final ModelPart leftwingpart6;
     private final ModelPart leftwingp5;
 
-    public DragonDefaultModel() {textureWidth = 256;
+    public DragonDefaultModel() {
+        textureWidth = 256;
         textureHeight = 256;
         body = new ModelPart(this);
         body.setPivot(0.0F, -7.0F, -2.0F);
@@ -561,15 +562,14 @@ public class DragonDefaultModel<T extends Entity> extends EntityModel<T> {
     }
 
 
-
     public void setRotationAngle(ModelPart bone, float x, float y, float z) {
         bone.pitch = x;
         bone.yaw = y;
         bone.roll = z;
     }
 
-	@Override
-    public void render(MatrixStack matrixStack, VertexConsumer	buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+    @Override
+    public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         body.render(matrixStack, buffer, packedLight, packedOverlay);
     }
 }

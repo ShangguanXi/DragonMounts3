@@ -1,9 +1,9 @@
 {
-    "parent": "item/handheld",
-	"textures": {
-	    "layer0": "dragonmounts:items/tools/sword/enchant_dragon_sword"
-	},
-	"display": {
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "dragonmounts:items/tools/sword/enchant_dragon_sword"
+  },
+  "display": {
     "thirdperson_righthand": {
       "rotation": [
         0,

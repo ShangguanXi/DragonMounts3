@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-	"textures": {
-	    "layer0": "dragonmounts:items/tools/etc/diamond_shears"
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "dragonmounts:items/tools/shears/diamond_shears"
+  }
 }

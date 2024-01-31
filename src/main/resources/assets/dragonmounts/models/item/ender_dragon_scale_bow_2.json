@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "dragonmounts:items/bow/ender_dragon_scale_bow_2"
+  }
+}

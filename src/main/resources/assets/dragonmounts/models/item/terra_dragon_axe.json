@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-	"textures": {
-	    "layer0": "dragonmounts:items/tools/axe/terra_dragon_axe"
-	}
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "dragonmounts:items/tools/axe/terra_dragon_axe"
+  }
 }

@@ -32,6 +32,7 @@ public class DragonSkullEntityRenderer extends BlockEntityRenderer<SkullBlockEnt
     public DragonSkullEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
+
     private static final Map MODELS = Util.make(Maps.newHashMap(), (hashMap) -> {
         SkullEntityModel skullEntityModel = new SkullEntityModel(0, 0, 64, 32);
         SkullEntityModel skullEntityModel2 = new SkullOverlayEntityModel();
@@ -57,18 +58,18 @@ public class DragonSkullEntityRenderer extends BlockEntityRenderer<SkullBlockEnt
         BlockState blockState = skullBlockEntity.getCachedState();
         boolean bl = blockState.getBlock() instanceof WallSkullBlock;
         Direction direction = bl ? blockState.get(WallSkullBlock.FACING) : null;
-        float h = 22.5F * (float)(bl ? (2 + direction.getHorizontal()) * 4 : blockState.get(SkullBlock.ROTATION));
-        render(direction, h, ((AbstractSkullBlock)blockState.getBlock()).getSkullType(), skullBlockEntity.getOwner(), g, matrixStack, vertexConsumerProvider, i);
+        float h = 22.5F * (float) (bl ? (2 + direction.getHorizontal()) * 4 : blockState.get(SkullBlock.ROTATION));
+        render(direction, h, ((AbstractSkullBlock) blockState.getBlock()).getSkullType(), skullBlockEntity.getOwner(), g, matrixStack, vertexConsumerProvider, i);
     }
 
     public static void render(@Nullable Direction direction, float f, SkullBlock.SkullType skullType, @Nullable GameProfile gameProfile, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        SkullEntityModel skullEntityModel = (SkullEntityModel)MODELS.get(skullType);
+        SkullEntityModel skullEntityModel = (SkullEntityModel) MODELS.get(skullType);
         matrixStack.push();
         if (direction == null) {
             matrixStack.translate(0.5, 0.0, 0.5);
         } else {
             float h = 0.25F;
-            matrixStack.translate(0.5F - (float)direction.getOffsetX() * 0.25F, 0.25, 0.5F - (float)direction.getOffsetZ() * 0.25F);
+            matrixStack.translate(0.5F - (float) direction.getOffsetX() * 0.25F, 0.25, 0.5F - (float) direction.getOffsetZ() * 0.25F);
         }
 
         matrixStack.scale(-1.0F, -1.0F, 1.0F);
@@ -79,7 +80,7 @@ public class DragonSkullEntityRenderer extends BlockEntityRenderer<SkullBlockEnt
     }
 
     private static RenderLayer method_3578(SkullBlock.SkullType skullType, @Nullable GameProfile gameProfile) {
-        Identifier identifier = (Identifier)TEXTURES.get(skullType);
+        Identifier identifier = (Identifier) TEXTURES.get(skullType);
         if (skullType == SkullBlock.Type.PLAYER && gameProfile != null) {
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
             Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = minecraftClient.getSkinProvider().getTextures(gameProfile);

@@ -67,7 +67,7 @@ public enum DragonFormatting implements StringIdentifiable {
     }
 
     public boolean isColor() {
-        return !this.modifier ;
+        return !this.modifier;
     }
 
     public Formatting getColorValue() {
@@ -94,16 +94,16 @@ public enum DragonFormatting implements StringIdentifiable {
 
     public static DragonFormatting byColorIndex(int colorIndex) {
 
-            DragonFormatting[] var1 = values();
-            int var2 = var1.length;
+        DragonFormatting[] var1 = values();
+        int var2 = var1.length;
 
-            for (DragonFormatting formatting : var1) {
-                if (formatting.getColorIndex() == colorIndex) {
-                    return formatting;
-                }
+        for (DragonFormatting formatting : var1) {
+            if (formatting.getColorIndex() == colorIndex) {
+                return formatting;
             }
+        }
 
-            return null;
+        return null;
     }
 
     @Environment(EnvType.CLIENT)

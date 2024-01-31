@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": {
-            "model": "dragonmounts:block/sunlight_dragon_egg"
-        }
+  "variants": {
+    "": {
+      "model": "dragonmounts:block/sunlight_dragon_egg"
     }
+  }
 }
