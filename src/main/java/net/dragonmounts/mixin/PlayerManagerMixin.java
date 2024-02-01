@@ -1,6 +1,6 @@
 package net.dragonmounts.mixin;
 
-import net.dragonmounts.capability.IArmorEffectManagerProvider;
+import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerManagerMixin {
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     public void sendInitPacket(ClientConnection connection, ServerPlayerEntity player, CallbackInfo info) {
-        ((IArmorEffectManagerProvider) player).dragonMounts3_Fabric$getManager().sendInitPacket();
+        ((Provider) player).dragonMounts3_Fabric$getManager().sendInitPacket();
     }
 }

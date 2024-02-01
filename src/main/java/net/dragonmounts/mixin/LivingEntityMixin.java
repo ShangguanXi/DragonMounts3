@@ -1,6 +1,6 @@
 package net.dragonmounts.mixin;
 
-import net.dragonmounts.capability.IArmorEffectManagerProvider;
+import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.dragonmounts.init.DMArmorEffects;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "dropXp", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getXpToDrop(Lnet/minecraft/entity/player/PlayerEntity;)I"), cancellable = true)
     public void xpBonus(CallbackInfo info) {
-        if (!this.world.isClient && ((IArmorEffectManagerProvider) this.attackingPlayer).dragonMounts3_Fabric$getManager().isActive(DMArmorEffects.ENCHANT)) {
+        if (!this.world.isClient && ((Provider) this.attackingPlayer).dragonMounts3_Fabric$getManager().isActive(DMArmorEffects.ENCHANT)) {
             for (int i = (int) (this.getXpToDrop(this.attackingPlayer) * 1.5F), j; i > 0; i -= j)
                 this.world.spawnEntity(new ExperienceOrbEntity(this.world, this.getX(), this.getY(), this.getZ(), j = ExperienceOrbEntity.roundToOrbSize(i)));
             info.cancel();

@@ -27,8 +27,8 @@ public final class ArmorEffectManager implements IArmorEffectManager {
 
     public static void onPlayerClone(PlayerEntity player, PlayerEntity priorPlayer, boolean alive) {
         if (alive) {
-            ArmorEffectManager manager = ((IArmorEffectManagerProvider) player).dragonMounts3_Fabric$getManager();
-            ArmorEffectManager priorManager = ((IArmorEffectManagerProvider) priorPlayer).dragonMounts3_Fabric$getManager();
+            ArmorEffectManager manager = ((IArmorEffectManager.Provider) player).dragonMounts3_Fabric$getManager();
+            ArmorEffectManager priorManager = ((IArmorEffectManager.Provider) priorPlayer).dragonMounts3_Fabric$getManager();
             manager.cdRef = priorManager.cdRef;
             manager.cdKey = priorManager.cdKey;
             manager.cdDat = priorManager.cdDat;

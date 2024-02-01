@@ -28,4 +28,10 @@ public interface IArmorEffectManager {
     void readNBT(NbtCompound nbt);
 
     void sendInitPacket();
+
+    interface Provider {
+        default ArmorEffectManager dragonMounts3_Fabric$getManager() {
+            throw new NullPointerException();
+        }
+    }
 }

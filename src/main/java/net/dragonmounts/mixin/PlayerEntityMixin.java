@@ -1,7 +1,7 @@
 package net.dragonmounts.mixin;
 
 import net.dragonmounts.capability.ArmorEffectManager;
-import net.dragonmounts.capability.IArmorEffectManagerProvider;
+import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.dragonmounts.init.DMArmorEffects;
 import net.dragonmounts.network.DMPacketHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -30,7 +30,7 @@ import static net.dragonmounts.capability.ArmorEffectManager.DATA_PARAMETER_KEY;
 import static net.dragonmounts.util.EntityUtil.addOrMergeEffect;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements IArmorEffectManagerProvider {
+public abstract class PlayerEntityMixin extends LivingEntity implements Provider {
     @Unique
     protected ArmorEffectManager manager = new ArmorEffectManager((PlayerEntity) (Object) this);
 

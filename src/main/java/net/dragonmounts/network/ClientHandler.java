@@ -1,7 +1,7 @@
 package net.dragonmounts.network;
 
 import net.dragonmounts.capability.ArmorEffectManager;
-import net.dragonmounts.capability.IArmorEffectManagerProvider;
+import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
 import net.dragonmounts.registry.CooldownCategory;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -54,7 +54,7 @@ public class ClientHandler {
             CooldownCategory category = CooldownCategory.REGISTRY.get(id);
             if (category == null) return;
             //noinspection DataFlowIssue
-            ((IArmorEffectManagerProvider) client.player).dragonMounts3_Fabric$getManager().setCooldown(category, cd);
+            ((Provider) client.player).dragonMounts3_Fabric$getManager().setCooldown(category, cd);
         });
     }
 

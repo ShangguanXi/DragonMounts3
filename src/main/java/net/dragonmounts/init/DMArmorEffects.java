@@ -3,7 +3,6 @@ package net.dragonmounts.init;
 import net.dragonmounts.api.IDragonScaleArmorEffect;
 import net.dragonmounts.capability.ArmorEffectManager;
 import net.dragonmounts.capability.IArmorEffectManager;
-import net.dragonmounts.capability.IArmorEffectManagerProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -240,7 +239,7 @@ public class DMArmorEffects {
     @SuppressWarnings("SameReturnValue")
     public static ActionResult meleeChanneling(PlayerEntity player, World world, Hand hand, Entity entity, EntityHitResult hit) {
         if (world.isClient || player.getRandom().nextBoolean()) return ActionResult.PASS;
-        ArmorEffectManager manager = ((IArmorEffectManagerProvider) player).dragonMounts3_Fabric$getManager();
+        ArmorEffectManager manager = ((IArmorEffectManager.Provider) player).dragonMounts3_Fabric$getManager();
         if (manager.isActive(STORM) && manager.getCooldown(STORM) <= 0) {
             BlockPos pos = entity.getBlockPos();
             if (world.isSkyVisible(pos)) {
