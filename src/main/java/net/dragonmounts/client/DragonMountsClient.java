@@ -2,10 +2,14 @@ package net.dragonmounts.client;
 
 import net.dragonmounts.api.DragonScaleArmorSuit;
 import net.dragonmounts.block.HatchableDragonEggBlock;
+import net.dragonmounts.client.gui.DragonCoreScreen;
+import net.dragonmounts.client.renders.DragonCoreRenderer;
 import net.dragonmounts.client.renders.DragonEggRenderer;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
+import net.dragonmounts.init.DMBlockEntities;
 import net.dragonmounts.init.DMBlocks;
 import net.dragonmounts.init.DMEntities;
+import net.dragonmounts.init.DMScreenHandlers;
 import net.dragonmounts.item.DragonScaleBowItem;
 import net.dragonmounts.item.DragonScaleShieldItem;
 import net.dragonmounts.network.DMPacketHandler;
@@ -13,8 +17,11 @@ import net.dragonmounts.registry.DragonType;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPickBlockGatherCallback;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.fabricmc.fabric.impl.client.rendering.ArmorProviderExtensions;
@@ -64,7 +71,10 @@ public class DragonMountsClient implements ClientModInitializer {
                 ((ArmorProviderExtensions) suit.boots).fabric_setArmorTextureProvider(provider);
             }
         }
+        BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_CORE, DragonCoreRenderer::new);
+        BuiltinItemRendererRegistry.INSTANCE.register(DMBlocks.DRAGON_CORE, DragonCoreRenderer.ITEM_RENDERER);
         EntityRendererRegistry.INSTANCE.register(DMEntities.HATCHABLE_DRAGON_EGG, (dispatcher, context) -> new DragonEggRenderer(dispatcher));
+        ScreenRegistry.register(DMScreenHandlers.DRAGON_CORE, DragonCoreScreen::new);
         DMPacketHandler.init();
     }
 }

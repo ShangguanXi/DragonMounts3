@@ -16,7 +16,6 @@ public interface IArmorEffectManager {
 
     boolean isActive(IArmorEffect effect);
 
-    @SuppressWarnings("UnusedReturnValue")
     void setCooldown(CooldownCategory category, int cooldown);
 
     int getCooldown(CooldownCategory category);

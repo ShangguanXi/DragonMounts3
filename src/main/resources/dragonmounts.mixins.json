@@ -10,7 +10,8 @@
     "ServerWorldMixin"
   ],
   "client": [
-    "ClientPlayNetworkHandlerMixin"
+    "ClientPlayNetworkHandlerMixin",
+    "ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

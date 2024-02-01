@@ -7,12 +7,10 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.network.PacketByteBuf;
 
 public class BlockEntityUtil {
-    public static Inventory getInventory(PlayerEntity player, PacketByteBuf extraData, int size) {
-        if (extraData != null) {
-            BlockEntity blockEntity = player.world.getBlockEntity(extraData.readBlockPos());
-            if (blockEntity instanceof Inventory) {
-                return (Inventory) blockEntity;
-            }
+    public static Inventory getInventory(PlayerEntity player, PacketByteBuf buffer, int size) {
+        if (buffer != null) {
+            BlockEntity entity = player.world.getBlockEntity(buffer.readBlockPos());
+            if (entity instanceof Inventory) return (Inventory) entity;
         }
         return new SimpleInventory(size);
     }
