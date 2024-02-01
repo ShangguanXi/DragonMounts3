@@ -4,6 +4,7 @@
   "package": "net.dragonmounts.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "LivingEntityMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
     "ServerWorldMixin"

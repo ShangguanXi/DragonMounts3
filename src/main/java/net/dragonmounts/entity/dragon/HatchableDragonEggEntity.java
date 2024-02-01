@@ -2,11 +2,19 @@ package net.dragonmounts.entity.dragon;
 
 import net.dragonmounts.api.IDragonTypified;
 import net.dragonmounts.block.HatchableDragonEggBlock;
+import net.dragonmounts.init.DMBlocks;
 import net.dragonmounts.init.DMEntities;
+import net.dragonmounts.init.DMSounds;
 import net.dragonmounts.init.DragonTypes;
 import net.dragonmounts.item.DragonScalesItem;
+import net.dragonmounts.network.DMPacketHandler;
 import net.dragonmounts.registry.DragonType;
 import net.dragonmounts.registry.DragonVariant;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.Block;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -21,9 +29,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
@@ -167,11 +178,8 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
     @Override
     public void tick() {
         super.tick();
-        if (this.amplitude > 0) {
-            --this.amplitude;
-        } else if (this.amplitude < 0) {
-            ++this.amplitude;
-        }
+        if (this.amplitude > 0) --this.amplitude;
+        else if (this.amplitude < 0) ++this.amplitude;
         if (this.world.isClient) {
             // spawn generic particles
             DragonType type = this.getDragonType();
@@ -198,16 +206,14 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
                 return;
             }
             if (this.random.nextFloat() < chance) {
-                this.rotationAxis = this.random.nextFloat() * 2F;
-                this.amplitude = this.random.nextBoolean() ? 10 : 20;
-                boolean flag = progress > EGG_CRACK_PROCESS_THRESHOLD;
-                if (flag) {
-                    this.spawnScales(1);
-                }
-                /*CHANNEL.send(
-                        TRACKING_ENTITY.with(() -> this),
-                        new SShakeDragonEggPacket(this.getId(), this.rotationAxis, this.amplitude, flag)
-                );*/
+                final PacketByteBuf buffer = PacketByteBufs.create().writeVarInt(this.getEntityId());
+                buffer.writeFloat(this.rotationAxis = this.random.nextFloat() * 2F);
+                buffer.writeVarInt(this.amplitude = this.random.nextBoolean() ? 10 : 20);
+                final boolean flag = progress > EGG_CRACK_PROCESS_THRESHOLD;
+                buffer.writeBoolean(flag);
+                if (flag) this.spawnScales(1);
+                for (ServerPlayerEntity player : PlayerLookup.tracking(this))
+                    ServerPlayNetworking.send(player, DMPacketHandler.SHAKE_DRAGON_EGG_PACKET_ID, buffer);
             }
         }
     }
@@ -264,18 +270,13 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
         return this.amplitude;
     }
 
-    /*
-    public void applyPacket(SShakeDragonEggPacket packet) {
-        this.rotationAxis = packet.axis;
-        this.amplitude = packet.amplitude;
-        if (packet.particle) {
-            HatchableDragonEggBlock block = this.getDragonType().getInstance(HatchableDragonEggBlock.class, DMBlocks.ENDER_DRAGON_EGG);
-            if (block != null) {
-                this.level.levelEvent(2001, this.blockPosition(), Block.getId(block.defaultBlockState()));
-            }
-        }
-        this.level.playSound(Minecraft.getInstance().player, this.getX(), this.getY(), this.getZ(), DMSounds.DRAGON_HATCHING.get(), SoundCategory.NEUTRAL, 1.0F, 1.0F);
-    }*/
+    public void applyPacket(float axis, int amplitude, boolean particle) {
+        this.rotationAxis = axis;
+        this.amplitude = amplitude;
+        if (particle)
+            this.world.syncWorldEvent(2001, this.getBlockPos(), Block.getRawIdFromState(this.getDragonType().getInstance(HatchableDragonEggBlock.class, DMBlocks.ENDER_DRAGON_EGG).getDefaultState()));
+        this.world.playSound(MinecraftClient.getInstance().player, this.getX(), this.getY(), this.getZ(), DMSounds.DRAGON_HATCHING, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+    }
 
     public void setDragonType(DragonType type, boolean resetHealth) {
         AttributeContainer manager = this.getAttributes();

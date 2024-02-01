@@ -27,8 +27,8 @@ public final class ArmorEffectManager implements IArmorEffectManager {
 
     public static void onPlayerClone(PlayerEntity player, PlayerEntity priorPlayer, boolean alive) {
         if (alive) {
-            ArmorEffectManager manager = ((IArmorEffectManagerProvider) player).dragonMounts3_Fabric$getArmorEffectManager();
-            ArmorEffectManager priorManager = ((IArmorEffectManagerProvider) priorPlayer).dragonMounts3_Fabric$getArmorEffectManager();
+            ArmorEffectManager manager = ((IArmorEffectManagerProvider) player).dragonMounts3_Fabric$getManager();
+            ArmorEffectManager priorManager = ((IArmorEffectManagerProvider) priorPlayer).dragonMounts3_Fabric$getManager();
             manager.cdRef = priorManager.cdRef;
             manager.cdKey = priorManager.cdKey;
             manager.cdDat = priorManager.cdDat;
@@ -149,7 +149,11 @@ public final class ArmorEffectManager implements IArmorEffectManager {
             this.setCDImpl(id, cooldown, temp);
         } else this.setCDImpl(id, cooldown, 0);
         if (!this.player.world.isClient)
-            ServerPlayNetworking.send((ServerPlayerEntity) this.player, SYNC_COOLDOWN_PACKET_ID, PacketByteBufs.create().writeVarInt(id).writeVarInt(cooldown));
+            ServerPlayNetworking.send(
+                    (ServerPlayerEntity) this.player,
+                    SYNC_COOLDOWN_PACKET_ID,
+                    PacketByteBufs.create().writeVarInt(id).writeVarInt(cooldown)
+            );
     }
 
     @Override
@@ -297,44 +301,4 @@ public final class ArmorEffectManager implements IArmorEffectManager {
             }
         }
     }
-
-    /*public static class Storage implements Capability.IStorage<IArmorEffectManager> {
-        @Nullable
-        @Override
-        public CompoundNBT writeNBT(Capability<IArmorEffectManager> capability, IArmorEffectManager instance, Direction side) {
-            return instance.saveNBT();
-        }
-
-        @Override
-        public void readNBT(Capability<IArmorEffectManager> capability, IArmorEffectManager instance, Direction side, INBT nbt) {
-            instance.readNBT((CompoundNBT) nbt);
-        }
-    }
-
-    public static class Provider implements ICapabilitySerializable<CompoundNBT> {
-        private final IArmorEffectManager manager;
-
-        public Provider(PlayerEntity player) {
-            this.manager = ARMOR_EFFECT_MANAGER.getDefaultInstance();
-            if (this.manager != null) {
-                this.manager.bind(player);
-            }
-        }
-
-        @Override
-        public CompoundNBT serializeNBT() {
-            return (CompoundNBT) ARMOR_EFFECT_MANAGER.getStorage().writeNBT(ARMOR_EFFECT_MANAGER, manager, null);
-        }
-
-        @Override
-        public void deserializeNBT(CompoundNBT nbt) {
-            ARMOR_EFFECT_MANAGER.getStorage().readNBT(ARMOR_EFFECT_MANAGER, this.manager, null, nbt);
-        }
-
-        @Nonnull
-        @Override
-        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction side) {
-            return ARMOR_EFFECT_MANAGER.orEmpty(capability, LazyOptional.of(() -> this.manager));
-        }
-    }*/
 }
