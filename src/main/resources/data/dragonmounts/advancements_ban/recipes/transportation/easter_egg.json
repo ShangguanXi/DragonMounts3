@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "dragonmounts:easter_egg"
+    ]
+  },
+  "criteria": {
+    "easter_egg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:saddle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "dragonmounts:easter_egg"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "easter_egg",
+      "has_the_recipe"
+    ]
+  ]
+}

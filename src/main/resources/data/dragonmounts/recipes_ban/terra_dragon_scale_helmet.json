@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "dragonmounts:terra_dragon_scales"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:terra_dragon_scale_helmet"
+  }
+}

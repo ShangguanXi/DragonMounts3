@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "dragonmounts:fire_dragon_scale_helmet"
+    ]
+  },
+  "criteria": {
+    "has_dragon_scales": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dragonmounts:fire_dragon_scales"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "dragonmounts:fire_dragon_scale_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dragon_scales",
+      "has_the_recipe"
+    ]
+  ]
+}

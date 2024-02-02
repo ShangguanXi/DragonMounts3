@@ -4,7 +4,6 @@ import net.dragonmounts.api.IDragonTypified;
 import net.dragonmounts.block.HatchableDragonEggBlock;
 import net.dragonmounts.init.DMBlocks;
 import net.dragonmounts.init.DMEntities;
-import net.dragonmounts.init.DMSounds;
 import net.dragonmounts.init.DragonTypes;
 import net.dragonmounts.item.DragonScalesItem;
 import net.dragonmounts.network.DMPacketHandler;
@@ -13,8 +12,7 @@ import net.dragonmounts.registry.DragonVariant;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.block.Block;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -34,7 +32,6 @@ import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
@@ -161,13 +158,9 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
 
     @Override
     public ActionResult interact(PlayerEntity player, Hand hand) {
-        if (!this.isAlive()) {
-            return ActionResult.PASS;
-        } else if (player.isSneaking()) {
+        if (this.isAlive() && player.isSneaking()) {
             HatchableDragonEggBlock block = this.getDragonType().getInstance(HatchableDragonEggBlock.class, null);
-            if (block == null) {
-                return ActionResult.FAIL;
-            }
+            if (block == null) return ActionResult.FAIL;
             this.remove();
             this.world.setBlockState(this.getBlockPos(), block.getDefaultState());
             return ActionResult.SUCCESS;
@@ -270,12 +263,10 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
         return this.amplitude;
     }
 
-    public void applyPacket(float axis, int amplitude, boolean particle) {
+    public BlockState handlePacket(float axis, int amplitude) {
         this.rotationAxis = axis;
         this.amplitude = amplitude;
-        if (particle)
-            this.world.syncWorldEvent(2001, this.getBlockPos(), Block.getRawIdFromState(this.getDragonType().getInstance(HatchableDragonEggBlock.class, DMBlocks.ENDER_DRAGON_EGG).getDefaultState()));
-        this.world.playSound(MinecraftClient.getInstance().player, this.getX(), this.getY(), this.getZ(), DMSounds.DRAGON_HATCHING, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+        return this.getDragonType().getInstance(HatchableDragonEggBlock.class, DMBlocks.ENDER_DRAGON_EGG).getDefaultState();
     }
 
     public void setDragonType(DragonType type, boolean resetHealth) {

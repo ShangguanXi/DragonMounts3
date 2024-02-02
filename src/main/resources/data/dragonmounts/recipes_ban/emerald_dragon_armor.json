@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X #",
+    " XX",
+    "## "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:gems/emerald"
+    },
+    "X": {
+      "tag": "forge:storage_blocks/emerald"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:emerald_dragon_armor"
+  }
+}

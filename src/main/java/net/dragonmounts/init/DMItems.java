@@ -9,6 +9,8 @@ import net.dragonmounts.item.*;
 import net.dragonmounts.registry.DragonType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -282,7 +284,9 @@ public class DMItems {
             null,
             slot -> new Settings().group(TOOL_TAB).fireproof()
     );
-
+    //Shears
+    public static final TieredShearsItem DIAMOND_SHEARS = createTieredShears("diamond_shears", ToolMaterials.DIAMOND, item());
+    public static final TieredShearsItem NETHERITE_SHEARS = createTieredShears("netherite_shears", ToolMaterials.NETHERITE, item().fireproof());
     private static DragonArmorItem createDragonArmor(String name, String texture, int protection, Settings settings) {
         return Registry.register(Registry.ITEM, new Identifier(MOD_ID, name), new DragonArmorItem(new Identifier(DragonMounts.MOD_ID, texture), protection, settings));
     }
@@ -354,6 +358,11 @@ public class DMItems {
     private static DragonScaleSwordItem createDragonScaleSword(String name, DragonScaleTier tier, Settings settings) {
         DragonScaleSwordItem item = new DragonScaleSwordItem(tier, 3, -2.0F, settings);
         tier.type.bindInstance(DragonScaleSwordItem.class, item);
+        return Registry.register(Registry.ITEM, new Identifier(MOD_ID, name), item);
+    }
+
+    private static TieredShearsItem createTieredShears(String name, ToolMaterial tier, Settings settings) {
+        TieredShearsItem item = new TieredShearsItem(tier, settings);
         return Registry.register(Registry.ITEM, new Identifier(MOD_ID, name), item);
     }
 

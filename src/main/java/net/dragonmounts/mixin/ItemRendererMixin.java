@@ -32,7 +32,7 @@ public abstract class ItemRendererMixin {
                 final IDragonScaleArmorEffect.Advanced advanced = (IDragonScaleArmorEffect.Advanced) effect;
                 final int cooldown = ArmorEffectManager.getLocalCooldown(advanced);
                 if (cooldown > 0) {
-                    float remaining = cooldown / (float) advanced.cooldown;
+                    float remaining = MathHelper.clamp(cooldown / (float) advanced.cooldown, 0F, 1F);
                     RenderSystem.disableDepthTest();
                     RenderSystem.disableTexture();
                     RenderSystem.enableBlend();

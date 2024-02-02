@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Y ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:string"
+    },
+    "Y": {
+      "tag": "forge:cobblestone"
+    },
+    "X": {
+      "tag": "forge:ender_pearls"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:amulet"
+  }
+}

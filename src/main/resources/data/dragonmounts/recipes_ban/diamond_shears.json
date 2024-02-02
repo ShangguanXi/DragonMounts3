@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X",
+    "X "
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:diamond_shears"
+  }
+}

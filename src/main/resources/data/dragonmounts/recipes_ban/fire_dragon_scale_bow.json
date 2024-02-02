@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #X",
+    "# X",
+    " #X"
+  ],
+  "key": {
+    "#": {
+      "item": "dragonmounts:fire_dragon_scales"
+    },
+    "X": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:fire_dragon_scale_bow"
+  }
+}

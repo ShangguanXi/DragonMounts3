@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "dragonmounts:gold_ingot_form_blasting"
+    ]
+  },
+  "criteria": {
+    "has_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dragonmounts:golden_dragon_armor"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "dragonmounts:gold_ingot_form_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_armor",
+      "has_the_recipe"
+    ]
+  ]
+}

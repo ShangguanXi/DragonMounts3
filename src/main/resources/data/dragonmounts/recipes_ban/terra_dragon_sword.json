@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "item": "dragonmounts:terra_dragon_scales"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:terra_dragon_sword"
+  }
+}

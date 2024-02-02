@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "item": "dragonmounts:nether_dragon_scales"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:nether_dragon_pickaxe"
+  }
+}

@@ -4,12 +4,16 @@
   "package": "net.dragonmounts.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockStateMixin",
+    "ItemPredicateMixin",
     "LivingEntityMixin",
+    "MatchToolLootConditionSerializerMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
     "ServerWorldMixin"
   ],
   "client": [
+    "ChatScreenMixin",
     "ClientPlayNetworkHandlerMixin",
     "ItemRendererMixin"
   ],

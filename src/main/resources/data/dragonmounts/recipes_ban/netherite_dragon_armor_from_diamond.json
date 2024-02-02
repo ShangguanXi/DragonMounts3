@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "dragonmounts:diamond_dragon_armor"
+  },
+  "addition": {
+    "tag": "forge:storage_blocks/netherite"
+  },
+  "result": {
+    "item": "dragonmounts:netherite_dragon_armor"
+  }
+}

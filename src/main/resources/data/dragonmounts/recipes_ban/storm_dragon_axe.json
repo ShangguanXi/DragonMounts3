@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "X#",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "item": "dragonmounts:storm_dragon_scales"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:storm_dragon_axe"
+  }
+}

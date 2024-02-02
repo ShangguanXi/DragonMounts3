@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WXW",
+    "WWW",
+    " W "
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/iron"
+    },
+    "W": {
+      "item": "dragonmounts:zombie_dragon_scales"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:zombie_dragon_scale_shield"
+  }
+}

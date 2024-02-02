@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "item": "dragonmounts:sunlight_dragon_scales"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:sunlight_dragon_shovel"
+  }
+}

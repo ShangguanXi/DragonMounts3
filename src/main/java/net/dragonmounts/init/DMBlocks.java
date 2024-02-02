@@ -54,9 +54,7 @@ public class DMBlocks {
     static {
         final AbstractBlock.ContextPredicate predicate = (state, world, pos) -> {
             BlockEntity entity = world.getBlockEntity(pos);
-            if (entity instanceof DragonCoreBlockEntity) {
-                return ((DragonCoreBlockEntity) entity).isClosed();
-            }
+            if (entity instanceof DragonCoreBlockEntity) return ((DragonCoreBlockEntity) entity).isClosed();
             return true;
         };
         final DragonCoreBlock block = new DragonCoreBlock(AbstractBlock.Settings.of(Material.PORTAL, MapColor.BLACK)
@@ -74,6 +72,7 @@ public class DMBlocks {
     private static HatchableDragonEggBlock registerDragonEggBlock(String name, DragonType type, MapColor color, Item.Settings settings) {
         final Identifier identifier = new Identifier(MOD_ID, name);
         final HatchableDragonEggBlock block = new HatchableDragonEggBlock(type, FabricBlockSettings.of(Material.EGG, color).strength(0.0F, 9.0F).luminance(DRAGON_EGG_LUMINANCE).nonOpaque());
+        type.bindInstance(HatchableDragonEggBlock.class, block);
         Registry.register(Registry.ITEM, identifier, new BlockItem(block, settings));
         return Registry.register(Registry.BLOCK, identifier, block);
     }

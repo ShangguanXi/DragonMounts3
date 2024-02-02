@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "#R#"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "#": {
+      "tag": "forge:cobblestone"
+    },
+    "X": {
+      "tag": "dragonmounts:dragon_scale_bows"
+    }
+  },
+  "result": {
+    "item": "minecraft:dispenser"
+  }
+}

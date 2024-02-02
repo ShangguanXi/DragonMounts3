@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X #",
+    " XX",
+    "## "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/gold"
+    },
+    "X": {
+      "tag": "forge:storage_blocks/gold"
+    }
+  },
+  "result": {
+    "item": "dragonmounts:golden_dragon_armor"
+  }
+}

@@ -37,7 +37,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import static net.dragonmounts.capability.ArmorEffectManager.DATA_PARAMETER_KEY;
 import static net.dragonmounts.util.EntityUtil.addOrMergeEffect;
@@ -51,12 +50,15 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Provider
     public abstract ItemCooldownManager getItemCooldownManager();
 
     @Unique
-    private static final Consumer<LivingEntity> ON_SHIELD_BREAK = entity -> entity.sendToolBreakStatus(entity.getActiveHand());
-    @Unique
     protected ArmorEffectManager manager = new ArmorEffectManager((PlayerEntity) (Object) this);
 
     private PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Unique
+    private void onShieldBreak(LivingEntity entity) {
+        entity.sendToolBreakStatus(this.getActiveHand());
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -84,7 +86,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Provider
         if (item instanceof DragonScaleShieldItem) {
             if (!this.world.isClient) this.incrementStat(Stats.USED.getOrCreateStat(item));
             if (amount >= 3.0F) {
-                this.activeItemStack.damage(1 + MathHelper.floor(amount), this, ON_SHIELD_BREAK);
+                this.activeItemStack.damage(1 + MathHelper.floor(amount), this, this::onShieldBreak);
                 if (this.activeItemStack.isEmpty()) {
                     this.activeItemStack = ItemStack.EMPTY;
                     if (this.getActiveHand() == Hand.OFF_HAND) this.equipStack(EquipmentSlot.OFFHAND, ItemStack.EMPTY);

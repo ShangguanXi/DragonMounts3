@@ -3,8 +3,11 @@ package net.dragonmounts.network;
 import net.dragonmounts.capability.ArmorEffectManager;
 import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
+import net.dragonmounts.init.DMSounds;
 import net.dragonmounts.registry.CooldownCategory;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
@@ -66,8 +69,12 @@ public class ClientHandler {
         client.execute(() -> {
             if (client.world == null) return;
             Entity entity = client.world.getEntityById(id);
-            if (entity instanceof HatchableDragonEggEntity)
-                ((HatchableDragonEggEntity) entity).applyPacket(axis, amplitude, particle);
+            if (entity instanceof HatchableDragonEggEntity) {
+                BlockState state = ((HatchableDragonEggEntity) entity).handlePacket(axis, amplitude);
+                if (particle)
+                    client.world.syncWorldEvent(2001, entity.getBlockPos(), Block.getRawIdFromState(state));
+                client.world.playSound(client.player, entity.getX(), entity.getY(), entity.getZ(), DMSounds.DRAGON_HATCHING, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            }
         });
     }
 }

@@ -1,8 +1,10 @@
 package net.dragonmounts.block;
 
 import net.dragonmounts.api.IDragonTypified;
+import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
 import net.dragonmounts.registry.DragonType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.DragonEggBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,25 +23,14 @@ import java.util.List;
 import static net.dragonmounts.DragonMounts.BLOCK_TRANSLATION_KEY_PREFIX;
 
 public class HatchableDragonEggBlock extends DragonEggBlock implements IDragonTypified {
-    /*protected static void spawn(World world, BlockPos pos, DragonType type) {
+    public static ActionResult spawn(World world, BlockPos pos, DragonType type) {
         world.setBlockState(pos, Blocks.AIR.getDefaultState());
         HatchableDragonEggEntity entity = new HatchableDragonEggEntity(world);
         entity.setDragonType(type, true);
-        entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         world.spawnEntity(entity);
+        return ActionResult.CONSUME;
     }
-
-    public static void interact(PlayerInteractEvent.RightClickBlock event) {
-        World world = event.getWorld();
-        if (DragonMountsConfig.SERVER.block_override.get() && !world.isClient) {
-            BlockPos pos = event.getPos();
-            Block block = world.getBlockState(pos).getBlock();
-            if (block == Blocks.DRAGON_EGG && !world.getRegistryKey().equals(World.END)) {
-                event.setUseBlock(Event.Result.DENY);
-                spawn(world, pos, DragonTypes.ENDER);
-            }
-        }
-    }*/
 
     private static final String TRANSLATION_KEY = BLOCK_TRANSLATION_KEY_PREFIX + "dragon_egg";
     protected DragonType type;
@@ -65,8 +56,7 @@ public class HatchableDragonEggBlock extends DragonEggBlock implements IDragonTy
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) return ActionResult.SUCCESS;
         if (world.getRegistryKey().equals(World.END)) return super.onUse(state, world, pos, player, hand, hit);
-        //spawn(level, pos, this.type);
-        return ActionResult.CONSUME;
+        return spawn(world, pos, this.type);
     }
 
     @Override

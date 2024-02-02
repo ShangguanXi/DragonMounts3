@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "dragonmounts:dispenser"
+    ]
+  },
+  "criteria": {
+    "has_bow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "dragonmounts:dragon_scale_bows"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "dragonmounts:dispenser"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bow",
+      "has_the_recipe"
+    ]
+  ]
+}
