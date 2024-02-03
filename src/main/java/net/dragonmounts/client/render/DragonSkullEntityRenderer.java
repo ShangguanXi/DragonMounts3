@@ -1,4 +1,4 @@
-package net.dragonmounts.client.renders;
+package net.dragonmounts.client.render;
 
 import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;

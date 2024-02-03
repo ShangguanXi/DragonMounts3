@@ -36,10 +36,9 @@ public class TieredShearsItem extends ShearsItem {
             BlockPos pos = dragon.getBlockPos();
             if (dragon.isShearable(stack, dragon.world, pos)) {
                 if (dragon.isOwnedBy(player)) {
-                    List<ItemStack> drops = dragon.onSheared(player, stack, dragon.world, pos, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack));
                     Random random = dragon.getRandom();
                     boolean flag = false;
-                    for (ItemStack drop : drops) {
+                    for (ItemStack drop : dragon.onSheared(player, stack, dragon.level, pos, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack))) {
                         ItemEntity item = entity.spawnAtLocation(drop, 1.0F);
                         if (item != null) {
                             flag = true;

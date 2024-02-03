@@ -1,4 +1,4 @@
-package net.dragonmounts.client.renders;
+package net.dragonmounts.client.render;
 
 import net.dragonmounts.block.entity.DragonCoreBlockEntity;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;

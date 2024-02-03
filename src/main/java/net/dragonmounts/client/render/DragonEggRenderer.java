@@ -1,4 +1,4 @@
-package net.dragonmounts.client.renders;
+package net.dragonmounts.client.render;
 
 import net.dragonmounts.block.HatchableDragonEggBlock;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;

@@ -15,7 +15,9 @@
   "client": [
     "ChatScreenMixin",
     "ClientPlayNetworkHandlerMixin",
-    "ItemRendererMixin"
+    "CreativeInventoryScreenMixin",
+    "ItemRendererMixin",
+    "ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

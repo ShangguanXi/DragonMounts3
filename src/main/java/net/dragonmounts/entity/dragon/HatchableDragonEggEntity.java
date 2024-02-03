@@ -1,5 +1,6 @@
 package net.dragonmounts.entity.dragon;
 
+import net.dragonmounts.DragonMountsConfig;
 import net.dragonmounts.api.IDragonTypified;
 import net.dragonmounts.block.HatchableDragonEggBlock;
 import net.dragonmounts.init.DMBlocks;
@@ -63,7 +64,7 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
 
     public HatchableDragonEggEntity(EntityType<? extends HatchableDragonEggEntity> type, World world) {
         super(type, world);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(/*DragonMountsConfig.SERVER.base_health.get()*/90);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(DragonMountsConfig.SERVER.base_health.get());
     }
 
     public HatchableDragonEggEntity(World world) {
@@ -72,7 +73,7 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return LivingEntity.createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*DragonMountsConfig.SERVER.base_health.get()*/90)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, DragonMountsConfig.SERVER.base_health.get())
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0);
     }
 

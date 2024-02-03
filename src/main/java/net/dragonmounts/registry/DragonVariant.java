@@ -36,7 +36,7 @@ public class DragonVariant implements IDragonTypified {
 
     public final DragonType type;
     public final Identifier identifier;
-    private int index = -1;
+    int index = -1;// non-private to simplify nested class access
     //private VariantAppearance appearance;
 
     public DragonVariant(Identifier identifier, DragonType type) {
@@ -88,36 +88,13 @@ public class DragonVariant implements IDragonTypified {
         }
 
         @SuppressWarnings("UnusedReturnValue")
-        private boolean add(final DragonVariant variant) {
+        boolean add(final DragonVariant variant) {
             if (variant.type != this.type || variant.index >= 0) return false;
             this.grow(this.size + 1);
             variant.index = this.size;
             this.variants[this.size++] = variant;
             assert this.size <= this.variants.length;
             return true;
-        }
-
-        @SuppressWarnings("UnusedReturnValue")
-        private boolean remove(final DragonVariant variant) {
-            if (variant.type != this.type || variant.index < 0) return false;
-            if (variant.index >= this.size)
-                throw new IndexOutOfBoundsException("Index (" + variant.index + ") is greater than or equal to list size (" + this.size + ")");
-            this.size--;
-            if (variant.index != this.size) {
-                System.arraycopy(this.variants, variant.index + 1, this.variants, variant.index, this.size - variant.index);
-            }
-            variant.index = -1;
-            this.variants[this.size] = null;
-            assert this.size <= this.variants.length;
-            return true;
-        }
-
-        private void clear() {
-            for (int i = 0; i < this.size; ++i) {
-                this.variants[i].index = -1;
-                this.variants[i] = null;
-            }
-            this.size = 0;
         }
 
         public DragonVariant draw(Random random, DragonVariant current) {
