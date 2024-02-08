@@ -1,7 +1,13 @@
 package net.dragonmounts.registry;
 
 import net.dragonmounts.api.IDragonTypified;
+import net.dragonmounts.block.DragonHeadBlock;
+import net.dragonmounts.block.DragonHeadWallBlock;
+import net.dragonmounts.client.variant.VariantAppearance;
+import net.dragonmounts.item.DragonHeadItem;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
@@ -36,13 +42,20 @@ public class DragonVariant implements IDragonTypified {
 
     public final DragonType type;
     public final Identifier identifier;
+    public final DragonHeadItem headItem;
+    public final DragonHeadBlock headBlock;
+    public final DragonHeadWallBlock headWallBlock;
     int index = -1;// non-private to simplify nested class access
-    //private VariantAppearance appearance;
+    private VariantAppearance appearance;
 
-    public DragonVariant(Identifier identifier, DragonType type) {
-        this.identifier = identifier;
+    public DragonVariant(DragonType type, String namespace, String name, AbstractBlock.Settings block, FabricItemSettings item) {
+        this.identifier = new Identifier(namespace, name);
         this.type = type;
         type.variants.register(this);
+        final Identifier standing = new Identifier(namespace, name + "_dragon_head");
+        this.headBlock = Registry.register(Registry.BLOCK, standing, new DragonHeadBlock(this, block));
+        this.headWallBlock = Registry.register(Registry.BLOCK, new Identifier(namespace, name + "_dragon_head_wall"), new DragonHeadWallBlock(this, AbstractBlock.Settings.copy(this.headBlock).dropsLike(this.headBlock)));
+        this.headItem = Registry.register(Registry.ITEM, standing, new DragonHeadItem(this, this.headBlock, this.headWallBlock, item));
     }
 
     @Override
@@ -50,7 +63,7 @@ public class DragonVariant implements IDragonTypified {
         return this.type;
     }
 
-    /*public VariantAppearance getAppearance(VariantAppearance defaultValue) {
+    public VariantAppearance getAppearance(VariantAppearance defaultValue) {
         return this.appearance == null ? defaultValue : this.appearance;
     }
 
@@ -59,7 +72,19 @@ public class DragonVariant implements IDragonTypified {
         VariantAppearance old = this.appearance;
         this.appearance = value;
         return old;
-    }*/
+    }
+
+    public DragonHeadItem getHeadItem() {
+        return this.headItem;
+    }
+
+    public DragonHeadBlock getHeadBlock() {
+        return this.headBlock;
+    }
+
+    public DragonHeadWallBlock getHeadWallBlock() {
+        return this.headWallBlock;
+    }
 
     /**
      * Simplified {@link it.unimi.dsi.fastutil.objects.ReferenceArrayList}

@@ -1,7 +1,7 @@
 package net.dragonmounts.init;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.impl.item.group.ItemGroupExtensions;
-import net.minecraft.item.Item.Settings;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -32,20 +32,20 @@ public class DMItemGroups {
         }
     };
 
-    public static Settings none() {
-        return new Settings();
+    public static FabricItemSettings none() {
+        return new FabricItemSettings();
     }
 
-    public static Settings block() {
-        return new Settings().group(BLOCK_TAB);
+    public static FabricItemSettings block() {
+        return new FabricItemSettings().group(BLOCK_TAB);
     }
 
-    public static Settings item() {
-        return new Settings().group(ITEM_TAB);
+    public static FabricItemSettings item() {
+        return new FabricItemSettings().group(ITEM_TAB);
     }
 
-    public static Settings tool() {
-        return new Settings().group(TOOL_TAB);
+    public static FabricItemSettings tool() {
+        return new FabricItemSettings().group(TOOL_TAB);
     }
 
     public static abstract class Impl extends ItemGroup {

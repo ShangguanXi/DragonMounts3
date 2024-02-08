@@ -81,14 +81,17 @@ public class TameCommand {
                 }
             }
         }
-        if (flag)
-            if (targets.size() == 1)
+        if (flag) {
+            if (targets.size() == 1) {
                 source.sendError(createClassCastException(targets.iterator().next(), TameableEntity.class));
-            else source.sendError(new TranslatableText("commands.dragonmounts.tame.multiple", count));
-        else if (count == 1)
+            } else {
+                source.sendError(new TranslatableText("commands.dragonmounts.tame.multiple", count, owner.getName()));
+            }
+        } else if (count == 1) {
             source.sendFeedback(new TranslatableText("commands.dragonmounts.tame.single", cache.getDisplayName(), owner.getName()), true);
-        else
+        } else {
             source.sendFeedback(new TranslatableText("commands.dragonmounts.tame.multiple", count, owner.getName()), true);
+        }
         return count;
     }
 }

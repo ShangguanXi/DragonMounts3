@@ -14,7 +14,7 @@ public abstract class MatchToolLootConditionSerializerMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/loot/condition/MatchToolLootCondition;<init>(Lnet/minecraft/predicate/item/ItemPredicate;)V")
     )
     public ItemPredicate useFabricShears(ItemPredicate predicate) {
-        ((IModdedItemPredicate) predicate).dragonMounts3_Fabric$useFabricShears();
+        ((IModdedItemPredicate) predicate).dragonmounts$useFabricShears();
         return predicate;
     }
 }

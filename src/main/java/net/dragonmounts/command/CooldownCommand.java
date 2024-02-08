@@ -36,7 +36,7 @@ public class CooldownCommand {
         source.sendFeedback(new TranslatableText("commands.dragonmounts.cooldown.get.success",
                 player.getDisplayName(),
                 category.identifier,
-                ((Provider) player).dragonMounts3_Fabric$getManager().getCooldown(category)
+                ((Provider) player).dragonmounts$getManager().getCooldown(category)
         ), true);
         return 1;
     }
@@ -47,7 +47,7 @@ public class CooldownCommand {
             source.sendFeedback(new TranslatableText("commands.dragonmounts.cooldown.get.success",
                     player.getDisplayName(),
                     category.identifier,
-                    ((Provider) player).dragonMounts3_Fabric$getManager().getCooldown(category)
+                    ((Provider) player).dragonmounts$getManager().getCooldown(category)
             ), true);
             ++sum;
         }
@@ -59,7 +59,7 @@ public class CooldownCommand {
     }
 
     public static int set(ServerCommandSource source, ServerPlayerEntity player, CooldownCategory category, int value) {
-        ((Provider) player).dragonMounts3_Fabric$getManager().setCooldown(category, value);
+        ((Provider) player).dragonmounts$getManager().setCooldown(category, value);
         source.sendFeedback(new TranslatableText("commands.dragonmounts.cooldown.set.single", player.getDisplayName(), category.identifier, value), true);
         return 1;
     }
@@ -67,7 +67,7 @@ public class CooldownCommand {
     public static int set(ServerCommandSource source, Collection<ServerPlayerEntity> players, CooldownCategory category, int value) {
         int sum = 0;
         for (ServerPlayerEntity player : players) {
-            ((Provider) player).dragonMounts3_Fabric$getManager().setCooldown(category, value);
+            ((Provider) player).dragonmounts$getManager().setCooldown(category, value);
             ++sum;
         }
         if (sum == 0) {

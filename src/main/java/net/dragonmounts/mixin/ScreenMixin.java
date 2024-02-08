@@ -27,9 +27,6 @@ import java.util.List;
 @Mixin(Screen.class)
 public abstract class ScreenMixin extends AbstractParentElement implements IWrappedTooltipRenderer {
     @Shadow
-    public abstract List<Text> getTooltipFromItem(ItemStack stack);
-
-    @Shadow
     protected TextRenderer textRenderer;
 
     @Shadow
@@ -38,17 +35,20 @@ public abstract class ScreenMixin extends AbstractParentElement implements IWrap
     @Shadow
     public int height;
 
+    @Shadow
+    public abstract List<Text> getTooltipFromItem(ItemStack stack);
+
     @Inject(method = "renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/item/ItemStack;II)V", at = @At("HEAD"), cancellable = true)
     public void renderWrappedTooltip(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo info) {
         final List<Text> raw = this.getTooltipFromItem(stack);
         if (!raw.isEmpty()) {
-            this.dragonMounts3_Fabric$renderWrappedTooltip(matrices, raw, x, y);
+            this.forge$renderWrappedTooltip(matrices, raw, x, y);
             info.cancel();
         }
     }
 
     @Override
-    public void dragonMounts3_Fabric$renderWrappedTooltip(MatrixStack matrices, List<? extends Text> raw, int x, int y) {
+    public void forge$renderWrappedTooltip(MatrixStack matrices, List<? extends Text> raw, int x, int y) {
         ObjectArrayList<OrderedText> texts = new ObjectArrayList<>(raw.size());
         OrderedText temp;
         int textWidth = 0;

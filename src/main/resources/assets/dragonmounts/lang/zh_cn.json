@@ -2,6 +2,7 @@
   "attribute.name.dragon.flight_speed": "飞行速度",
   "block.dragonmounts.dragon_core": "龙核心",
   "block.dragonmounts.dragon_egg": "龙蛋",
+  "block.dragonmounts.dragon_head": "龙首",
   "block.dragonmounts.dragon_nest": "龙巢方块",
   "commands.dragonmounts.config.query": "配置%s目前为：%s",
   "commands.dragonmounts.config.set": "配置%s已被设为：%s",

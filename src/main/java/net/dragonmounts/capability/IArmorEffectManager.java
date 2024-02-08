@@ -29,7 +29,7 @@ public interface IArmorEffectManager {
     void sendInitPacket();
 
     interface Provider {
-        default ArmorEffectManager dragonMounts3_Fabric$getManager() {
+        default ArmorEffectManager dragonmounts$getManager() {
             throw new NullPointerException();
         }
     }

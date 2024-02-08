@@ -138,7 +138,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Provider
     }
 
     @Override
-    public ArmorEffectManager dragonMounts3_Fabric$getManager() {
+    public ArmorEffectManager dragonmounts$getManager() {
         return this.manager;
     }
 }

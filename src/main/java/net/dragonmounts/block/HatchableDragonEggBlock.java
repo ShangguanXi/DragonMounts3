@@ -60,7 +60,7 @@ public class HatchableDragonEggBlock extends DragonEggBlock implements IDragonTy
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(this.type.getName());
     }
 

@@ -21,7 +21,8 @@ public class DragonTypes {
                     .addImmunity(DamageSource.WITHER)
                     .addHabitat(Blocks.LAPIS_BLOCK)
                     .addHabitat(Blocks.LAPIS_ORE)
-                    .setEnvironmentPredicate(egg -> egg.getY() >= egg.world.getHeight() * 0.625));
+                    .setEnvironmentPredicate(egg -> egg.getY() >= egg.world.getHeight() * 0.625)
+    );
     public static final DragonType ENCHANT = new DragonType(
             new Identifier(MOD_ID, "enchant"),
             new DragonType.Properties(0x8359AE)
@@ -30,7 +31,8 @@ public class DragonTypes {
                     .addImmunity(DamageSource.LIGHTNING_BOLT)
                     .addImmunity(DamageSource.WITHER)
                     .addHabitat(Blocks.BOOKSHELF)
-                    .addHabitat(Blocks.ENCHANTING_TABLE));
+                    .addHabitat(Blocks.ENCHANTING_TABLE)
+    );
     public static final DragonType ENDER = new DragonType(
             DragonType.DEFAULT_KEY,
             new DragonType.Properties(0xAB39BE)
@@ -70,7 +72,8 @@ public class DragonTypes {
                     //.addHabitat(Blocks.LEAVES)
                     //.addHabitat(Blocks.LEAVES2)
                     .addHabitat(BiomeKeys.JUNGLE)
-                    .addHabitat(BiomeKeys.JUNGLE_HILLS));
+                    .addHabitat(BiomeKeys.JUNGLE_HILLS)
+    );
     public static final DragonType ICE = new DragonType(
             new Identifier(MOD_ID, "ice"),
             new DragonType.Properties(0x00F2FF)

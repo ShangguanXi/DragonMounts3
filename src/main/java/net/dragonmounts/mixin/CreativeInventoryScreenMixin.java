@@ -17,6 +17,6 @@ public abstract class CreativeInventoryScreenMixin implements IWrappedTooltipRen
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen;renderTooltip(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;II)V")
     )
     public void renderWrappedTooltip(CreativeInventoryScreen instance, MatrixStack matrices, List<Text> list, int x, int y) {
-        if (!list.isEmpty()) this.dragonMounts3_Fabric$renderWrappedTooltip(matrices, list, x, y);
+        if (!list.isEmpty()) this.forge$renderWrappedTooltip(matrices, list, x, y);
     }
 }

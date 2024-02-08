@@ -239,7 +239,7 @@ public class DMArmorEffects {
     @SuppressWarnings("SameReturnValue")
     public static ActionResult meleeChanneling(PlayerEntity player, World world, Hand hand, Entity entity, EntityHitResult hit) {
         if (world.isClient || player.getRandom().nextBoolean()) return ActionResult.PASS;
-        ArmorEffectManager manager = ((IArmorEffectManager.Provider) player).dragonMounts3_Fabric$getManager();
+        ArmorEffectManager manager = ((IArmorEffectManager.Provider) player).dragonmounts$getManager();
         if (manager.isActive(STORM) && manager.getCooldown(STORM) <= 0) {
             BlockPos pos = entity.getBlockPos();
             if (world.isSkyVisible(pos)) {

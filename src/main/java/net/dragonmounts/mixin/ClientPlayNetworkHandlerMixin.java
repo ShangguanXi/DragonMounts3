@@ -1,33 +1,26 @@
 package net.dragonmounts.mixin;
 
 import net.dragonmounts.capability.ArmorEffectManager;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.client.recipebook.ClientRecipeBook;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.stat.StatHandler;
+import net.minecraft.network.packet.s2c.play.PlayerRespawnS2CPacket;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin implements ClientPlayPacketListener {
-    @Shadow
-    private MinecraftClient client;
-
-    @Redirect(method = "onPlayerRespawn", at = @At(
+    @Inject(method = "onPlayerRespawn", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/network/ClientPlayerInteractionManager;createPlayer(Lnet/minecraft/client/world/ClientWorld;Lnet/minecraft/stat/StatHandler;Lnet/minecraft/client/recipebook/ClientRecipeBook;ZZ)Lnet/minecraft/client/network/ClientPlayerEntity;"
-    ))
-    public ClientPlayerEntity onPlayerClone(ClientPlayerInteractionManager instance, ClientWorld world, StatHandler statHandler, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting) {
-        ClientPlayerEntity priorPlayer = this.client.player;
-        //noinspection DataFlowIssue
-        ClientPlayerEntity player = this.client.interactionManager.createPlayer(world, priorPlayer.getStatHandler(), priorPlayer.getRecipeBook(), priorPlayer.isSneaking(), priorPlayer.isSprinting());
+            target = "Lnet/minecraft/client/network/ClientPlayerEntity;setEntityId(I)V"
+    ), locals = LocalCapture.CAPTURE_FAILHARD)
+    public void onPlayerClone(PlayerRespawnS2CPacket $, CallbackInfo info, RegistryKey<World> __, DimensionType _$, ClientPlayerEntity priorPlayer, int $_, String $$, ClientPlayerEntity player) {
         ArmorEffectManager.onPlayerClone(player, priorPlayer, true);
-        return player;
     }
 }

@@ -34,4 +34,6 @@ public abstract class TameableDragonEntity extends TameableEntity {
     public ItemStack getSaddleStack() {return ItemStack.EMPTY;}
 
     public void inventoryChanged() {}
+
+    public float getMaxDeathTime() {return 120.0F;}
 }

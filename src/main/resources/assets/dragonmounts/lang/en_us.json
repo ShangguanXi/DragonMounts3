@@ -2,6 +2,7 @@
   "attribute.name.dragon.flight_speed": "Flight Speed",
   "block.dragonmounts.dragon_core": "Dragon Core",
   "block.dragonmounts.dragon_egg": "Dragon Egg",
+  "block.dragonmounts.dragon_head": "Dragon Head",
   "block.dragonmounts.dragon_nest": "Nest Block",
   "commands.dragonmounts.config.query": "Config %s is currently set to: %s",
   "commands.dragonmounts.config.set": "Config %s is now set to: %s",

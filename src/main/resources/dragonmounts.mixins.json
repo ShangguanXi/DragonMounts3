@@ -16,6 +16,7 @@
     "ChatScreenMixin",
     "ClientPlayNetworkHandlerMixin",
     "CreativeInventoryScreenMixin",
+    "HeadFeatureRendererMixin",
     "ItemRendererMixin",
     "ScreenMixin"
   ],

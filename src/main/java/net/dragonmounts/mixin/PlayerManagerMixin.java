@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerManagerMixin {
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     public void sendInitPacket(ClientConnection connection, ServerPlayerEntity player, CallbackInfo info) {
-        ((Provider) player).dragonMounts3_Fabric$getManager().sendInitPacket();
+        ((Provider) player).dragonmounts$getManager().sendInitPacket();
     }
 }

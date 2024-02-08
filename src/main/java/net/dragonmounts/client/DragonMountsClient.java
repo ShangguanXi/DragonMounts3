@@ -3,17 +3,17 @@ package net.dragonmounts.client;
 import net.dragonmounts.api.DragonScaleArmorSuit;
 import net.dragonmounts.block.HatchableDragonEggBlock;
 import net.dragonmounts.client.gui.DragonCoreScreen;
-import net.dragonmounts.client.render.DragonCoreRenderer;
 import net.dragonmounts.client.render.DragonEggRenderer;
+import net.dragonmounts.client.render.block.DragonCoreRenderer;
+import net.dragonmounts.client.render.block.DragonHeadRenderer;
+import net.dragonmounts.client.variant.VariantAppearances;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
-import net.dragonmounts.init.DMBlockEntities;
-import net.dragonmounts.init.DMBlocks;
-import net.dragonmounts.init.DMEntities;
-import net.dragonmounts.init.DMScreenHandlers;
+import net.dragonmounts.init.*;
 import net.dragonmounts.item.DragonScaleBowItem;
 import net.dragonmounts.item.DragonScaleShieldItem;
 import net.dragonmounts.network.DMPacketHandler;
 import net.dragonmounts.registry.DragonType;
+import net.dragonmounts.registry.DragonVariant;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -39,6 +39,7 @@ public class DragonMountsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        VariantAppearances.bindAppearance();
         ClientPickBlockGatherCallback.EVENT.register((player, result) -> {
             if (result.getType() == HitResult.Type.ENTITY) {
                 Entity entity = ((EntityHitResult) result).getEntity();
@@ -72,7 +73,11 @@ public class DragonMountsClient implements ClientModInitializer {
             }
         }
         BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_CORE, DragonCoreRenderer::new);
+        BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_HEAD, DragonHeadRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(DMBlocks.DRAGON_CORE, DragonCoreRenderer.ITEM_RENDERER);
+        for (DragonVariant variant : DragonVariants.VALUES) {
+            BuiltinItemRendererRegistry.INSTANCE.register(variant.headItem, DragonHeadRenderer.ITEM_RENDERER);
+        }
         EntityRendererRegistry.INSTANCE.register(DMEntities.HATCHABLE_DRAGON_EGG, (dispatcher, context) -> new DragonEggRenderer(dispatcher));
         ScreenRegistry.register(DMScreenHandlers.DRAGON_CORE, DragonCoreScreen::new);
         DMPacketHandler.init();

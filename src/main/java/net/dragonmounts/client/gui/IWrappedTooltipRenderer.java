@@ -6,5 +6,5 @@ import net.minecraft.text.Text;
 import java.util.List;
 
 public interface IWrappedTooltipRenderer {
-    default void dragonMounts3_Fabric$renderWrappedTooltip(MatrixStack matrices, List<? extends Text> raw, int x, int y) {}
+    default void forge$renderWrappedTooltip(MatrixStack matrices, List<? extends Text> raw, int x, int y) {}
 }

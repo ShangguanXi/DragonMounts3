@@ -57,7 +57,7 @@ public class ClientHandler {
             CooldownCategory category = CooldownCategory.REGISTRY.get(id);
             if (category == null) return;
             //noinspection DataFlowIssue
-            ((Provider) client.player).dragonMounts3_Fabric$getManager().setCooldown(category, cd);
+            ((Provider) client.player).dragonmounts$getManager().setCooldown(category, cd);
         });
     }
 

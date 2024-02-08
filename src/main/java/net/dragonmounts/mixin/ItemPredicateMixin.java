@@ -23,7 +23,7 @@ public abstract class ItemPredicateMixin implements IModdedItemPredicate {
     private Item item;
 
     @Override
-    public void dragonMounts3_Fabric$useFabricShears() {
+    public void dragonmounts$useFabricShears() {
         if (this.tag == null && this.item == Items.SHEARS) {
             this.tag = FabricToolTags.SHEARS;
             this.item = null;

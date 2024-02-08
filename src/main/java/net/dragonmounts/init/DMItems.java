@@ -21,6 +21,7 @@ import static net.dragonmounts.api.DragonScaleArmorSuit.DRAGONMOUNTS_TOOL_TAB;
 import static net.dragonmounts.init.DMItemGroups.*;
 
 public class DMItems {
+
     public static final DragonScalesItem AETHER_DRAGON_SCALES = createDragonScales("aether_dragon_scales", DragonTypes.AETHER, item());
     public static final DragonScalesItem ENCHANT_DRAGON_SCALES = createDragonScales("enchant_dragon_scales", DragonTypes.ENCHANT, item());
     public static final DragonScalesItem ENDER_DRAGON_SCALES = createDragonScales("ender_dragon_scales", DragonTypes.ENDER, item());
