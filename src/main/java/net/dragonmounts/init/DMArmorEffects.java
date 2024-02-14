@@ -96,7 +96,7 @@ public class DMArmorEffects {
                 );
                 return level > 3;
             }
-            //Trying to add these two effects in any case requires using `|` instead of `||`
+            // use `|` instead of `||` to avoid short-circuit evaluation when trying to add both of these two effects
             if (level > 3 && manager.getCooldown(this) <= 0 && player.getHealth() < 10 && (addOrMergeEffect(player, StatusEffects.RESISTANCE, 600, 2, true, true, true) | addOrMergeEffect(player, StatusEffects.STRENGTH, 300, 1, true, true, true))) {
                 player.world.syncWorldEvent(2003, player.getBlockPos(), 0);
                 player.world.playSoundFromEntity(null, player, SoundEvents.BLOCK_END_PORTAL_SPAWN, SoundCategory.HOSTILE, 0.05F, 1.0F);
@@ -244,7 +244,7 @@ public class DMArmorEffects {
             BlockPos pos = entity.getBlockPos();
             if (world.isSkyVisible(pos)) {
                 LightningEntity bolt = EntityType.LIGHTNING_BOLT.create(world);
-                //noinspection DataFlowIssue
+                if (bolt == null) return ActionResult.PASS;
                 bolt.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(pos));
                 bolt.setChanneler((ServerPlayerEntity) player);
                 world.spawnEntity(bolt);

@@ -20,6 +20,7 @@ public class DragonMountsConfig {
         public final BooleanConfig converge_pitch_angle = new BooleanConfig("ConvergePitchAngle", "converge_pitch_angle", true);
         public final BooleanConfig converge_yaw_angle = new BooleanConfig("ConvergeYawAngle", "converge_yaw_angle", true);
         public final BooleanConfig hover_animation = new BooleanConfig("HoverAnimation", "hover_animation", true);
+        public final BooleanConfig redirect_inventory = new BooleanConfig("RedirectInventory", "redirect_inventory", true);
         public final BooleanConfig toggle_descent = new BooleanConfig("ToggleDescent", "toggle_descent", false);
 
         private Client(File dir, String file) {
@@ -35,6 +36,7 @@ public class DragonMountsConfig {
             this.converge_pitch_angle.read(compound);
             this.converge_yaw_angle.read(compound);
             this.hover_animation.read(compound);
+            this.redirect_inventory.read(compound);
             this.toggle_descent.read(compound);
         }
 
@@ -46,6 +48,7 @@ public class DragonMountsConfig {
             this.converge_pitch_angle.save(compound);
             this.converge_yaw_angle.save(compound);
             this.hover_animation.save(compound);
+            this.redirect_inventory.save(compound);
             this.toggle_descent.save(compound);
             return compound;
         }

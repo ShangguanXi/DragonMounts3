@@ -87,6 +87,8 @@ public class DragonVariants {
             ZOMBIE_MALE
     );
 
+    public static void init() {}
+
     private static DragonVariant create(DragonType type, String name) {
         return new DragonVariant(type, MOD_ID, name, Settings.of(DECORATION).strength(1F), block().rarity(UNCOMMON));
     }

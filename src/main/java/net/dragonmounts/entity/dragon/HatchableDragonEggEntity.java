@@ -7,7 +7,7 @@ import net.dragonmounts.init.DMBlocks;
 import net.dragonmounts.init.DMEntities;
 import net.dragonmounts.init.DragonTypes;
 import net.dragonmounts.item.DragonScalesItem;
-import net.dragonmounts.network.DMPacketHandler;
+import net.dragonmounts.network.DMPackets;
 import net.dragonmounts.registry.DragonType;
 import net.dragonmounts.registry.DragonVariant;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -207,7 +207,7 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
                 buffer.writeBoolean(flag);
                 if (flag) this.spawnScales(1);
                 for (ServerPlayerEntity player : PlayerLookup.tracking(this))
-                    ServerPlayNetworking.send(player, DMPacketHandler.SHAKE_DRAGON_EGG_PACKET_ID, buffer);
+                    ServerPlayNetworking.send(player, DMPackets.SHAKE_DRAGON_EGG_PACKET_ID, buffer);
             }
         }
     }
@@ -270,12 +270,12 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
         return this.getDragonType().getInstance(HatchableDragonEggBlock.class, DMBlocks.ENDER_DRAGON_EGG).getDefaultState();
     }
 
-    public void setDragonType(DragonType type, boolean resetHealth) {
+    public final void setDragonType(DragonType type, boolean reset) {
         AttributeContainer manager = this.getAttributes();
         manager.removeModifiers(this.getDragonType().attributes);
         this.dataTracker.set(DATA_DRAGON_TYPE, type);
         manager.addTemporaryModifiers(type.attributes);
-        if (resetHealth) {
+        if (reset) {
             EntityAttributeInstance health = this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             if (health != null) {
                 this.setHealth((float) health.getValue());
@@ -284,12 +284,12 @@ public class HatchableDragonEggEntity extends LivingEntity implements IDragonTyp
     }
 
     @Override
-    public void setDragonType(DragonType type) {
+    public final void setDragonType(DragonType type) {
         this.setDragonType(type, false);
     }
 
     @Override
-    public DragonType getDragonType() {
+    public final DragonType getDragonType() {
         return this.dataTracker.get(DATA_DRAGON_TYPE);
     }
 }

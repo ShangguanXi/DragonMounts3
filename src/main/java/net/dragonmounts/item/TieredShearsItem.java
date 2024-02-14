@@ -42,7 +42,7 @@ public class TieredShearsItem extends ShearsItem {
                         ItemEntity item = entity.spawnAtLocation(drop, 1.0F);
                         if (item != null) {
                             flag = true;
-                            item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1D, random.nextFloat() * 0.05D, (random.nextFloat() - random.nextFloat()) * 0.1D));
+                            item.setDeltaMovement(item.getVelocity().add((random.nextFloat() - random.nextFloat()) * 0.1D, random.nextFloat() * 0.05D, (random.nextFloat() - random.nextFloat()) * 0.1D));
                         }
                     }
                     if (flag) {

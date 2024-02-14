@@ -6,12 +6,15 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.dragonmounts.api.IDragonTypified;
+import net.dragonmounts.block.AbstractDragonHeadBlock;
+import net.dragonmounts.block.DragonHeadBlock;
+import net.dragonmounts.block.DragonHeadWallBlock;
 import net.dragonmounts.block.HatchableDragonEggBlock;
 import net.dragonmounts.init.DragonTypes;
+import net.dragonmounts.init.DragonVariants;
 import net.dragonmounts.registry.DragonType;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DragonEggBlock;
+import net.dragonmounts.registry.DragonVariant;
+import net.minecraft.block.*;
 import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
@@ -27,6 +30,8 @@ import java.util.Map;
 
 import static net.dragonmounts.command.DMCommand.HAS_PERMISSION_LEVEL_3;
 import static net.dragonmounts.command.DMCommand.createClassCastException;
+import static net.minecraft.state.property.Properties.HORIZONTAL_FACING;
+import static net.minecraft.state.property.Properties.ROTATION;
 
 public class TypeCommand {
     public abstract static class CommandHandler<A> {
@@ -55,10 +60,23 @@ public class TypeCommand {
             BlockState set(Block block, ServerWorld level, BlockPos pos, BlockState state, DragonType type);
         }
 
-        public static final Getter GETTER_DRAGON_EEG = (block, level, pos, state) -> DragonTypes.ENDER;
         public static final Setter SETTER_DRAGON_EEG = (block, level, pos, state, type) -> {
-            Block egg = type.getInstance(HatchableDragonEggBlock.class, null);
+            final Block egg = type.getInstance(HatchableDragonEggBlock.class, null);
             return egg == null ? state : egg.getDefaultState();
+        };
+        public static final Setter SETTER_DRAGON_HEAD = (block, level, pos, state, type) -> {
+            final DragonVariant variant = type.variants.draw(level.random, block == Blocks.DRAGON_HEAD ?
+                    DragonVariants.ENDER_FEMALE : block instanceof AbstractDragonHeadBlock ?
+                    ((AbstractDragonHeadBlock) block).variant : null
+            );
+            return variant == null ? state : variant.headBlock.getDefaultState().with(ROTATION, state.get(ROTATION));
+        };
+        public static final Setter SETTER_DRAGON_HEAD_WALL = (block, level, pos, state, type) -> {
+            final DragonVariant variant = type.variants.draw(level.random, block == Blocks.DRAGON_HEAD ?
+                    DragonVariants.ENDER_FEMALE : block instanceof AbstractDragonHeadBlock ?
+                    ((AbstractDragonHeadBlock) block).variant : null
+            );
+            return variant == null ? state : variant.headWallBlock.getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING));
         };
 
         private final Reference2ObjectOpenHashMap<Class<? extends Block>, Getter> getters = new Reference2ObjectOpenHashMap<>();
@@ -157,9 +175,15 @@ public class TypeCommand {
     public static final EntityHandler ENTITY_HANDLER = new EntityHandler();
 
     static {
-        BLOCK_HANDLER.bind(DragonEggBlock.class, BlockHandler.GETTER_DRAGON_EEG);
+        BLOCK_HANDLER.bind(DragonEggBlock.class, ($_, __, $, $$) -> DragonTypes.ENDER);
+        BLOCK_HANDLER.bind(SkullBlock.class, (block, __, $, $$) -> block == Blocks.DRAGON_HEAD ? DragonTypes.ENDER : null);
+        BLOCK_HANDLER.bind(WallSkullBlock.class, (block, __, $, $$) -> block == Blocks.DRAGON_WALL_HEAD ? DragonTypes.ENDER : null);
         BLOCK_HANDLER.bind(DragonEggBlock.class, BlockHandler.SETTER_DRAGON_EEG);
         BLOCK_HANDLER.bind(HatchableDragonEggBlock.class, BlockHandler.SETTER_DRAGON_EEG);
+        BLOCK_HANDLER.bind(DragonHeadBlock.class, BlockHandler.SETTER_DRAGON_HEAD);
+        BLOCK_HANDLER.bind(SkullBlock.class, BlockHandler.SETTER_DRAGON_HEAD);
+        BLOCK_HANDLER.bind(DragonHeadWallBlock.class, BlockHandler.SETTER_DRAGON_HEAD_WALL);
+        BLOCK_HANDLER.bind(WallSkullBlock.class, BlockHandler.SETTER_DRAGON_HEAD_WALL);
     }
 
     public static LiteralArgumentBuilder<ServerCommandSource> register() {

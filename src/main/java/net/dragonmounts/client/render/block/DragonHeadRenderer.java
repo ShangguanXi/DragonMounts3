@@ -2,7 +2,7 @@ package net.dragonmounts.client.render.block;
 
 import net.dragonmounts.block.AbstractDragonHeadBlock;
 import net.dragonmounts.block.entity.DragonHeadBlockEntity;
-import net.dragonmounts.client.model.DragonHeadModel;
+import net.dragonmounts.client.model.dragon.DragonHeadModel;
 import net.dragonmounts.client.variant.VariantAppearance;
 import net.dragonmounts.item.DragonHeadItem;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;

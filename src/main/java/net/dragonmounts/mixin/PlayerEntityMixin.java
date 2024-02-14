@@ -4,7 +4,7 @@ import net.dragonmounts.capability.ArmorEffectManager;
 import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.dragonmounts.init.DMArmorEffects;
 import net.dragonmounts.item.DragonScaleShieldItem;
-import net.dragonmounts.network.DMPacketHandler;
+import net.dragonmounts.network.DMPackets;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -49,11 +49,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Provider
     @Shadow
     public abstract ItemCooldownManager getItemCooldownManager();
 
+    @Shadow
+    public abstract boolean damage(DamageSource source, float amount);
+
     @Unique
     protected ArmorEffectManager manager = new ArmorEffectManager((PlayerEntity) (Object) this);
 
-    private PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
-        super(entityType, world);
+    private PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
+        super(type, world);
     }
 
     @Unique
@@ -62,7 +65,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Provider
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void tickManager(CallbackInfo ci) {
+    public void tickManager(CallbackInfo info) {
         this.manager.tick();
     }
 
@@ -133,8 +136,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Provider
         if (nether) this.manager.setCooldown(DMArmorEffects.NETHER, DMArmorEffects.NETHER.cooldown);
         PacketByteBuf buffer = PacketByteBufs.create().writeVarInt(this.getEntityId()).writeVarInt((ice ? 0b01 : 0b00) | (nether ? 0b10 : 0b00));
         for (ServerPlayerEntity player : PlayerLookup.tracking(this))
-            ServerPlayNetworking.send(player, DMPacketHandler.ARMOR_RIPOSTE_PACKET_ID, buffer);
-        ServerPlayNetworking.send((ServerPlayerEntity) this.manager.player, DMPacketHandler.ARMOR_RIPOSTE_PACKET_ID, buffer);
+            ServerPlayNetworking.send(player, DMPackets.ARMOR_RIPOSTE_PACKET_ID, buffer);
+        ServerPlayNetworking.send((ServerPlayerEntity) this.manager.player, DMPackets.ARMOR_RIPOSTE_PACKET_ID, buffer);
     }
 
     @Override

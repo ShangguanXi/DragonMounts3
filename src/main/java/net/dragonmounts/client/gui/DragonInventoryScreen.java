@@ -1,10 +1,12 @@
 package net.dragonmounts.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.dragonmounts.entity.dragon.TameableDragonEntity;
 import net.dragonmounts.inventory.DragonInventoryScreenHandler;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -39,9 +41,13 @@ public class DragonInventoryScreen extends AbstractInventoryScreen<DragonInvento
         int i = (this.width - this.backgroundWidth) >> 1;
         int j = (this.height - this.backgroundHeight) >> 1;
         this.drawTexture(matrixStack, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        if (this.handler.dragon.hasChest()) {
+        final TameableDragonEntity dragon = this.handler.dragon;
+        final EndCrystalEntity crystal = dragon.nearestCrystal;
+        if (dragon.hasChest()) {
             this.drawTexture(matrixStack, (this.width - 162) >> 1, (this.height - 74) >> 1, 7, 141, 162, 54);
         }
-        InventoryScreen.drawEntity(i + 60, j + 62, 5, (float) (i + 60) - x, (float) (j + 75 - 62) - y, this.handler.dragon);
+        dragon.nearestCrystal = null;// to disable crystal beam
+        InventoryScreen.drawEntity(i + 60, j + 62, 5, i - x + 60F, j - y + 13F, dragon);
+        dragon.nearestCrystal = crystal;
     }
 }

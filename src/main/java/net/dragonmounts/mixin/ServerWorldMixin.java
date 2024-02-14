@@ -1,6 +1,8 @@
 package net.dragonmounts.mixin;
 
+import net.dragonmounts.entity.dragon.DragonLifeStage;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
+import net.dragonmounts.entity.dragon.ServerDragonEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.scoreboard.ServerScoreboard;
 import net.minecraft.server.world.ServerWorld;
@@ -14,8 +16,14 @@ public abstract class ServerWorldMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/scoreboard/ServerScoreboard;resetEntityScore(Lnet/minecraft/entity/Entity;)V"
     ))
-    public void tryKeepScores(ServerScoreboard scoreboard, Entity entity) {
-        if (!(entity instanceof HatchableDragonEggEntity && ((HatchableDragonEggEntity) entity).isHatched()))
-            scoreboard.resetEntityScore(entity);
+    public void tryHatchDragonEgg(ServerScoreboard scoreboard, Entity entity) {
+        if (entity instanceof HatchableDragonEggEntity && ((HatchableDragonEggEntity) entity).isHatched()) {
+            HatchableDragonEggEntity egg = (HatchableDragonEggEntity) entity;
+            if (egg.isHatched()) {
+                egg.world.spawnEntity(new ServerDragonEntity(egg, DragonLifeStage.NEWBORN));
+                return;
+            }
+        }
+        scoreboard.resetEntityScore(entity);
     }
 }

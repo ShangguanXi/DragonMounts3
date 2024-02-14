@@ -21,6 +21,6 @@ public abstract class ClientPlayNetworkHandlerMixin implements ClientPlayPacketL
             target = "Lnet/minecraft/client/network/ClientPlayerEntity;setEntityId(I)V"
     ), locals = LocalCapture.CAPTURE_FAILHARD)
     public void onPlayerClone(PlayerRespawnS2CPacket $, CallbackInfo info, RegistryKey<World> __, DimensionType _$, ClientPlayerEntity priorPlayer, int $_, String $$, ClientPlayerEntity player) {
-        ArmorEffectManager.onPlayerClone(player, priorPlayer, true);
+        ArmorEffectManager.onPlayerClone(player, priorPlayer);
     }
 }

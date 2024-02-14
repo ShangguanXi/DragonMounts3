@@ -17,7 +17,6 @@ import net.minecraft.util.math.MathHelper;
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
 public class Interpolation {
-
     private static final float[][] CR = {
             {-0.5F, 1.5F, -1.5F, 0.5F},
             {1.0F, -2.5F, 2.0F, -0.5F},
@@ -66,6 +65,39 @@ public class Interpolation {
             float c1 = CR[2][0] * knot0 + CR[2][1] * knot1 + CR[2][2] * knot2 + CR[2][3] * knot3;
             float c0 = CR[3][0] * knot0 + CR[3][1] * knot1 + CR[3][2] * knot2 + CR[3][3] * knot3;
             result[i] = ((c3 * x + c2) * x + c1) * x + c0;
+        }
+    }
+
+    public static void smoothLinear(float[] a, float[] b, float[] c, float x) {
+        if (a.length != b.length || b.length != c.length) {
+            throw new IllegalArgumentException();
+        }
+        if (x <= 0) {
+            System.arraycopy(a, 0, c, 0, c.length);
+        } else if (x >= 1) {
+            System.arraycopy(b, 0, c, 0, c.length);
+        } else {
+            for (int i = 0; i < c.length; ++i) {
+                c[i] = clampedSmoothLinear(a[i], b[i], x);
+            }
+        }
+    }
+
+    public static void splineArrays(float x, boolean shift, float[] result, float[]... nodes) {
+        int i1 = (int) x % nodes.length;
+        int i2 = (i1 + 1) % nodes.length;
+        int i3 = (i1 + 2) % nodes.length;
+
+        float[] a1 = nodes[i1];
+        float[] a2 = nodes[i2];
+        float[] a3 = nodes[i3];
+
+        float xn = x % nodes.length - i1;
+
+        if (shift) {
+            catmullRomSpline(xn, result, a2, a3, a1, a2);
+        } else {
+            catmullRomSpline(xn, result, a1, a2, a3, a1);
         }
     }
 

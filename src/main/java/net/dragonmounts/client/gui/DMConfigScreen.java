@@ -26,6 +26,7 @@ public class DMConfigScreen extends Screen {
     protected LazyBooleanConfigOption convergePitch;
     protected LazyBooleanConfigOption convergeYaw;
     protected LazyBooleanConfigOption hoverAnimation;
+    protected LazyBooleanConfigOption redirectInventory;
     protected LazyBooleanConfigOption toggleDescent;
 
     public DMConfigScreen(MinecraftClient minecraft, Screen parent) {
@@ -42,12 +43,14 @@ public class DMConfigScreen extends Screen {
         this.convergePitch = new LazyBooleanConfigOption("options.dragonmounts.converge_pitch_angle", CLIENT.converge_pitch_angle, DEFAULT_STRINGIFY, null);
         this.convergeYaw = new LazyBooleanConfigOption("options.dragonmounts.converge_yaw_angle", CLIENT.converge_yaw_angle, DEFAULT_STRINGIFY, null);
         this.hoverAnimation = new LazyBooleanConfigOption("options.dragonmounts.hover_animation", CLIENT.hover_animation, DEFAULT_STRINGIFY, null);
+        this.redirectInventory = new LazyBooleanConfigOption("options.dragonmounts.redirect_inventory", CLIENT.redirect_inventory, DEFAULT_STRINGIFY, new TranslatableText("options.dragonmounts.redirect_inventory.note"));
         this.toggleDescent = new LazyBooleanConfigOption("key.dragonmounts.descent", CLIENT.toggle_descent, TOGGLE_STRINGIFY, null);
         this.list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
         this.list.addSingleOptionEntry(this.cameraDistance);
-        this.list.addOptionEntry(this.cameraOffset, this.toggleDescent);
+        this.list.addSingleOptionEntry(this.cameraOffset);
+        this.list.addOptionEntry(this.debug, this.toggleDescent);
         this.list.addOptionEntry(this.convergePitch, this.convergeYaw);
-        this.list.addOptionEntry(this.debug, this.hoverAnimation);
+        this.list.addOptionEntry(this.hoverAnimation, this.redirectInventory);
         this.children.add(this.list);
         this.addButton(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, view -> this.onClose()));
     }
@@ -66,6 +69,7 @@ public class DMConfigScreen extends Screen {
         this.convergePitch.save();
         this.convergeYaw.save();
         this.hoverAnimation.save();
+        this.redirectInventory.save();
         this.toggleDescent.save();
         CLIENT.save();
     }

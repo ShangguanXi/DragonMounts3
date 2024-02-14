@@ -6,12 +6,14 @@ import net.dragonmounts.client.gui.DragonCoreScreen;
 import net.dragonmounts.client.render.DragonEggRenderer;
 import net.dragonmounts.client.render.block.DragonCoreRenderer;
 import net.dragonmounts.client.render.block.DragonHeadRenderer;
+import net.dragonmounts.client.render.dragon.TameableDragonRenderer;
 import net.dragonmounts.client.variant.VariantAppearances;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
+import net.dragonmounts.entity.dragon.TameableDragonEntity;
 import net.dragonmounts.init.*;
 import net.dragonmounts.item.DragonScaleBowItem;
 import net.dragonmounts.item.DragonScaleShieldItem;
-import net.dragonmounts.network.DMPacketHandler;
+import net.dragonmounts.network.ClientHandler;
 import net.dragonmounts.registry.DragonType;
 import net.dragonmounts.registry.DragonVariant;
 import net.fabricmc.api.ClientModInitializer;
@@ -32,6 +34,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 
+import static net.dragonmounts.network.DMPackets.*;
+import static net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.registerGlobalReceiver;
+
 @Environment(EnvType.CLIENT)
 public class DragonMountsClient implements ClientModInitializer {
     private static final ModelPredicateProvider DURATION = (stack, world, entity) -> entity == null ? 0.0F : entity.getActiveItem() != stack ? 0.0F : (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0F;
@@ -43,10 +48,14 @@ public class DragonMountsClient implements ClientModInitializer {
         ClientPickBlockGatherCallback.EVENT.register((player, result) -> {
             if (result.getType() == HitResult.Type.ENTITY) {
                 Entity entity = ((EntityHitResult) result).getEntity();
-                if (entity instanceof HatchableDragonEggEntity)
+                if (entity instanceof HatchableDragonEggEntity) {
                     return new ItemStack(
                             ((HatchableDragonEggEntity) entity).getDragonType().getInstance(HatchableDragonEggBlock.class, DMBlocks.ENDER_DRAGON_EGG)
                     );
+                }
+                if (entity instanceof TameableDragonEntity) {
+                    //TODO Dragon Spawn Egg
+                }
             }
             return ItemStack.EMPTY;
         });
@@ -72,6 +81,7 @@ public class DragonMountsClient implements ClientModInitializer {
                 ((ArmorProviderExtensions) suit.boots).fabric_setArmorTextureProvider(provider);
             }
         }
+        ScreenRegistry.register(DMScreenHandlers.DRAGON_CORE, DragonCoreScreen::new);
         BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_CORE, DragonCoreRenderer::new);
         BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_HEAD, DragonHeadRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(DMBlocks.DRAGON_CORE, DragonCoreRenderer.ITEM_RENDERER);
@@ -79,7 +89,15 @@ public class DragonMountsClient implements ClientModInitializer {
             BuiltinItemRendererRegistry.INSTANCE.register(variant.headItem, DragonHeadRenderer.ITEM_RENDERER);
         }
         EntityRendererRegistry.INSTANCE.register(DMEntities.HATCHABLE_DRAGON_EGG, (dispatcher, context) -> new DragonEggRenderer(dispatcher));
-        ScreenRegistry.register(DMScreenHandlers.DRAGON_CORE, DragonCoreScreen::new);
-        DMPacketHandler.init();
+        EntityRendererRegistry.INSTANCE.register(DMEntities.TAMEABLE_DRAGON, (dispatcher, context) -> new TameableDragonRenderer(dispatcher));
+        registerPacketHandler();
+    }
+
+    private static void registerPacketHandler() {
+        registerGlobalReceiver(ARMOR_RIPOSTE_PACKET_ID, ClientHandler::handleArmorRiposte);
+        registerGlobalReceiver(INIT_COOLDOWN_PACKET_ID, ClientHandler::handleCooldownInit);
+        registerGlobalReceiver(SYNC_COOLDOWN_PACKET_ID, ClientHandler::handleCooldownSync);
+        registerGlobalReceiver(SHAKE_DRAGON_EGG_PACKET_ID, ClientHandler::handleEggShake);
+        registerGlobalReceiver(SYNC_DRAGON_AGE_PACKET_ID, ClientHandler::handleAgeSync);
     }
 }

@@ -2,6 +2,8 @@ package net.dragonmounts.network;
 
 import net.dragonmounts.capability.ArmorEffectManager;
 import net.dragonmounts.capability.IArmorEffectManager.Provider;
+import net.dragonmounts.client.ClientDragonEntity;
+import net.dragonmounts.entity.dragon.DragonLifeStage;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
 import net.dragonmounts.init.DMSounds;
 import net.dragonmounts.registry.CooldownCategory;
@@ -23,7 +25,7 @@ public class ClientHandler {
         int id = buffer.readVarInt(), flag = buffer.readVarInt();
         client.execute(() -> {
             World world = client.world;
-            if (world == null) return;
+            //noinspection DataFlowIssue
             Entity entity = world.getEntityById(id);
             if (entity == null) return;
             final double x = entity.getX();
@@ -46,8 +48,9 @@ public class ClientHandler {
     public static void handleCooldownInit(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buffer, PacketSender sender) {
         int size = buffer.readVarInt();
         int[] data = new int[size];
-        for (int i = 0; i < size; ++i)
+        for (int i = 0; i < size; ++i) {
             data[i] = buffer.readVarInt();
+        }
         client.execute(() -> ArmorEffectManager.init(data));
     }
 
@@ -67,13 +70,25 @@ public class ClientHandler {
         int amplitude = buffer.readVarInt();
         boolean particle = buffer.readBoolean();
         client.execute(() -> {
-            if (client.world == null) return;
+            //noinspection DataFlowIssue
             Entity entity = client.world.getEntityById(id);
             if (entity instanceof HatchableDragonEggEntity) {
                 BlockState state = ((HatchableDragonEggEntity) entity).handlePacket(axis, amplitude);
                 if (particle)
                     client.world.syncWorldEvent(2001, entity.getBlockPos(), Block.getRawIdFromState(state));
                 client.world.playSound(client.player, entity.getX(), entity.getY(), entity.getZ(), DMSounds.DRAGON_HATCHING, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            }
+        });
+    }
+
+    public static void handleAgeSync(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buffer, PacketSender sender) {
+        int id = buffer.readVarInt(), age = buffer.readVarInt();
+        DragonLifeStage stage = DragonLifeStage.byId(buffer.readVarInt());
+        client.execute(() -> {
+            //noinspection DataFlowIssue
+            Entity entity = client.world.getEntityById(id);
+            if (entity instanceof ClientDragonEntity) {
+                ((ClientDragonEntity) entity).handleAgeSync(age, stage);
             }
         });
     }

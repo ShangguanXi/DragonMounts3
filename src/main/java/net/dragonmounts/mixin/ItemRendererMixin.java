@@ -23,7 +23,10 @@ public abstract class ItemRendererMixin {
     @Shadow
     private void renderGuiQuad(BufferBuilder buffer, int x, int y, int width, int height, int red, int green, int blue, int alpha) {}
 
-    @Inject(method = "renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At("TAIL"))
+    @Inject(
+            method = "renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;getInstance()Lnet/minecraft/client/MinecraftClient;", ordinal = 0)
+    )
     public void renderCooldown(TextRenderer renderer, ItemStack stack, int x, int y, String label, CallbackInfo info) {
         final Item item = stack.getItem();
         if (item instanceof DragonScaleArmorItem) {

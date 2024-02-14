@@ -16,8 +16,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import static java.lang.System.arraycopy;
 import static java.util.Arrays.fill;
 import static net.dragonmounts.DragonMounts.MOD_ID;
-import static net.dragonmounts.network.DMPacketHandler.INIT_COOLDOWN_PACKET_ID;
-import static net.dragonmounts.network.DMPacketHandler.SYNC_COOLDOWN_PACKET_ID;
+import static net.dragonmounts.network.DMPackets.INIT_COOLDOWN_PACKET_ID;
+import static net.dragonmounts.network.DMPackets.SYNC_COOLDOWN_PACKET_ID;
 
 public final class ArmorEffectManager implements IArmorEffectManager {
     public static final String DATA_PARAMETER_KEY = MOD_ID + ":armor_effect_manager";
@@ -25,16 +25,14 @@ public final class ArmorEffectManager implements IArmorEffectManager {
     public static final int INITIAL_COOLDOWN_SIZE = 8;
     public static final int INITIAL_LEVEL_SIZE = 5;
 
-    public static void onPlayerClone(PlayerEntity player, PlayerEntity priorPlayer, boolean alive) {
-        if (alive) {
-            ArmorEffectManager manager = ((IArmorEffectManager.Provider) player).dragonmounts$getManager();
-            ArmorEffectManager priorManager = ((IArmorEffectManager.Provider) priorPlayer).dragonmounts$getManager();
-            manager.cdRef = priorManager.cdRef;
-            manager.cdKey = priorManager.cdKey;
-            manager.cdDat = priorManager.cdDat;
-            manager.cdMask = priorManager.cdMask;
-            manager.cdN = priorManager.cdN;
-        }
+    public static void onPlayerClone(PlayerEntity player, PlayerEntity priorPlayer) {
+        ArmorEffectManager manager = ((IArmorEffectManager.Provider) player).dragonmounts$getManager();
+        ArmorEffectManager priorManager = ((IArmorEffectManager.Provider) priorPlayer).dragonmounts$getManager();
+        manager.cdRef = priorManager.cdRef;
+        manager.cdKey = priorManager.cdKey;
+        manager.cdDat = priorManager.cdDat;
+        manager.cdMask = priorManager.cdMask;
+        manager.cdN = priorManager.cdN;
     }
 
     public final PlayerEntity player;

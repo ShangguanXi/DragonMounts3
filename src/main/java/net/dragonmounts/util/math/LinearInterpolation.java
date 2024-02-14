@@ -16,6 +16,10 @@ public class LinearInterpolation {
         this.current = this.previous = start;
     }
 
+    public float get() {
+        return this.current;
+    }
+
     public float get(float delta) {
         if (delta <= 0.0F) return this.previous;
         if (delta >= 1.0F) return this.current;

@@ -96,6 +96,8 @@
   "options.dragonmounts.converge_yaw_angle": "Yaw Convergence",
   "options.dragonmounts.debug": "DEBUG",
   "options.dragonmounts.hover_animation": "Hover Animation",
+  "options.dragonmounts.redirect_inventory": "Redirect Inventory",
+  "options.dragonmounts.redirect_inventory.note": "Whether to open your mount's inventory instead of yours",
   "subtitles.dragonmounts.dragon_egg.hatched": "Dragon Egg: Hatched",
   "subtitles.dragonmounts.dragon_egg.hatching": "Dragon Egg: Hatching",
   "tooltip.armor_effect.dragonmounts.aether": "When the wearer is sprinting, apply Speed II for 5s",

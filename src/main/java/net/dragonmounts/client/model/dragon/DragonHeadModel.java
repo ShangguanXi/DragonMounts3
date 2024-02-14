@@ -1,4 +1,4 @@
-package net.dragonmounts.client.model;
+package net.dragonmounts.client.model.dragon;
 
 import net.dragonmounts.util.ScaledModelPart;
 import net.dragonmounts.util.math.MathUtil;
@@ -46,11 +46,10 @@ public class DragonHeadModel extends Model {
 
         public Part(Model model) {
             super(model);
-            buildHead();
+            this.buildHead();
             this.addChild(this.createHorn(model, false));
             this.addChild(this.createHorn(model, true));
-            this.lowerJaw = this.createLowerJaw(model);
-            this.addChild(this.lowerJaw);
+            this.addChild(this.lowerJaw = this.createLowerJaw(model));
         }
 
         protected void buildHead() {
