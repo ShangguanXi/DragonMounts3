@@ -51,8 +51,8 @@ public class DragonModel extends EntityModel<ClientDragonEntity> {
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
+        this.head.render(matrices, buffer, light, overlay, red, green, blue, alpha);
         this.body.render(matrices, buffer, light, overlay, red, green, blue, alpha);
-        renderHead(matrices, buffer, light, overlay, red, green, blue, alpha);
         this.neck.render(matrices, buffer, light, overlay, red, green, blue, alpha);
         this.tail.render(matrices, buffer, light, overlay, red, green, blue, alpha);
         renderWings(matrices, buffer, light, overlay, red, green, blue, alpha);
@@ -70,10 +70,6 @@ public class DragonModel extends EntityModel<ClientDragonEntity> {
         this.render(matrices, buffer.getBuffer(appearance.getBodyForShoulder()), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         this.render(matrices, buffer.getBuffer(appearance.getGlowForShoulder()), 15728640, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
-    }
-
-    protected void renderHead(MatrixStack matrices, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
-        this.head.render(matrices, buffer, light, overlay, red, green, blue, alpha);
     }
 
     public void renderWings(MatrixStack matrices, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {

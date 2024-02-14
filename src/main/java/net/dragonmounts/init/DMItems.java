@@ -285,6 +285,24 @@ public class DMItems {
             null,
             slot -> new Settings().group(TOOL_TAB).fireproof()
     );
+    //Dragon Spawn Eggs
+    public static final DragonSpawnEggItem AETHER_DRAGON_SPAWN_EGG = createDragonSpawnEgg("aether_dragon_spawn_egg", DragonTypes.AETHER, 0x05C3D2, 0x281EE8, item());
+    public static final DragonSpawnEggItem ENCHANT_DRAGON_SPAWN_EGG = createDragonSpawnEgg("enchant_dragon_spawn_egg", DragonTypes.ENCHANT, 0xCC0DE0, 0xFFFFFF, item());
+    public static final DragonSpawnEggItem ENDER_DRAGON_SPAWN_EGG = createDragonSpawnEgg("ender_dragon_spawn_egg", DragonTypes.ENDER, 0x08080C, 0x79087E, item());
+    public static final DragonSpawnEggItem FIRE_DRAGON_SPAWN_EGG = createDragonSpawnEgg("fire_dragon_spawn_egg", DragonTypes.FIRE, 0x620508, 0xF7A502, item());
+    public static final DragonSpawnEggItem FOREST_DRAGON_SPAWN_EGG = createDragonSpawnEgg("forest_dragon_spawn_egg", DragonTypes.FOREST, 0x0C9613, 0x036408, item());
+    public static final DragonSpawnEggItem ICE_DRAGON_SPAWN_EGG = createDragonSpawnEgg("ice_dragon_spawn_egg", DragonTypes.ICE, 0xFFFFFF, 0x02D0EE, item());
+    public static final DragonSpawnEggItem MOONLIGHT_DRAGON_SPAWN_EGG = createDragonSpawnEgg("moonlight_dragon_spawn_egg", DragonTypes.MOONLIGHT, 0x00164E, 0xFEFEFE, item());
+    public static final DragonSpawnEggItem NETHER_DRAGON_SPAWN_EGG = createDragonSpawnEgg("nether_dragon_spawn_egg", DragonTypes.NETHER, 0x632F1B, 0xE7A621, item());
+    public static final DragonSpawnEggItem SCULK_DRAGON_SPAWN_EGG = createDragonSpawnEgg("sculk_dragon_spawn_egg", DragonTypes.SCULK, 0x0F4649, 0x39D6E0, item());
+    public static final DragonSpawnEggItem SKELETON_DRAGON_SPAWN_EGG = createDragonSpawnEgg("skeleton_dragon_spawn_egg", DragonTypes.SKELETON, 0xFFFFFF, 0x474F51, item());
+    public static final DragonSpawnEggItem STORM_DRAGON_SPAWN_EGG = createDragonSpawnEgg("storm_dragon_spawn_egg", DragonTypes.STORM, 0x010B0F, 0x0FA8CE, item());
+    public static final DragonSpawnEggItem SUNLIGHT_DRAGON_SPAWN_EGG = createDragonSpawnEgg("sunlight_dragon_spawn_egg", DragonTypes.SUNLIGHT, 0xF4950D, 0xF4E10D, item());
+    public static final DragonSpawnEggItem TERRA_DRAGON_SPAWN_EGG = createDragonSpawnEgg("terra_dragon_spawn_egg", DragonTypes.TERRA, 0x674517, 0xE6B10D, item());
+    public static final DragonSpawnEggItem WATER_DRAGON_SPAWN_EGG = createDragonSpawnEgg("water_dragon_spawn_egg", DragonTypes.WATER, 0x546FAD, 0x2B427E, item());
+    public static final DragonSpawnEggItem WITHER_DRAGON_SPAWN_EGG = createDragonSpawnEgg("wither_dragon_spawn_egg", DragonTypes.WITHER, 0x8A9999, 0x474F51, item());
+    public static final DragonSpawnEggItem ZOMBIE_DRAGON_SPAWN_EGG = createDragonSpawnEgg("zombie_dragon_spawn_egg", DragonTypes.ZOMBIE, 0x66664B, 0xB6D035, item());
+
     //Shears
     public static final TieredShearsItem DIAMOND_SHEARS = createTieredShears("diamond_shears", ToolMaterials.DIAMOND, item());
     public static final TieredShearsItem NETHERITE_SHEARS = createTieredShears("netherite_shears", ToolMaterials.NETHERITE, item().fireproof());
@@ -359,6 +377,12 @@ public class DMItems {
     private static DragonScaleSwordItem createDragonScaleSword(String name, DragonScaleTier tier, Settings settings) {
         DragonScaleSwordItem item = new DragonScaleSwordItem(tier, 3, -2.0F, settings);
         tier.type.bindInstance(DragonScaleSwordItem.class, item);
+        return Registry.register(Registry.ITEM, new Identifier(MOD_ID, name), item);
+    }
+
+    private static DragonSpawnEggItem createDragonSpawnEgg(String name, DragonType type, int background, int highlight, Settings settings) {
+        DragonSpawnEggItem item = new DragonSpawnEggItem(type, background, highlight, settings);
+        type.bindInstance(DragonSpawnEggItem.class, item);
         return Registry.register(Registry.ITEM, new Identifier(MOD_ID, name), item);
     }
 

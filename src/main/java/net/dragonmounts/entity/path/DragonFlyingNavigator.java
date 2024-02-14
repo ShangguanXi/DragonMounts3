@@ -11,8 +11,8 @@ import net.minecraft.world.World;
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
 public class DragonFlyingNavigator extends SwimNavigation {
-    public DragonFlyingNavigator(TameableDragonEntity dragon, World level) {
-        super(dragon, level);
+    public DragonFlyingNavigator(TameableDragonEntity dragon, World world) {
+        super(dragon, world);
     }
 
     @Override

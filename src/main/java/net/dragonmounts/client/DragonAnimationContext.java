@@ -339,7 +339,7 @@ public class DragonAnimationContext {
         head.roll = neck.roll * 0.2F;
         head.pivotX = neck.pivotX;
         head.pivotY = neck.pivotY;
-        head.pivotZ = neck.scaleZ;
+        head.pivotZ = neck.pivotZ;
         head.lowerJaw.pitch = this.bite * 0.72F/* + breath * 0.58F + roar * 0.67F*/ + (1 - MathHelper.sin(this.animBase)) * 0.1F * this.flutter;
 
     }
@@ -416,7 +416,7 @@ public class DragonAnimationContext {
         float rotYStand = 0;
         float rotXAir = 0;
         float rotYAir = 0;
-        for (int i = 0; i < TAIL_SEGMENT_COUNT_INT; i++) {
+        for (int i = 0; i < TAIL_SEGMENT_COUNT_INT; ++i) {
             float vertMulti = (i + 1) / TAIL_SEGMENT_COUNT_FLOAT;
             float angleLimit = 160F * vertMulti;
             // idle

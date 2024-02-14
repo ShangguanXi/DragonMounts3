@@ -52,12 +52,12 @@ public class TypeCommand {
     public static class BlockHandler extends CommandHandler<BlockPos> {
         @FunctionalInterface
         public interface Getter {
-            DragonType get(Block block, ServerWorld level, BlockPos pos, BlockState state);
+            DragonType get(Block block, ServerWorld world, BlockPos pos, BlockState state);
         }
 
         @FunctionalInterface
         public interface Setter {
-            BlockState set(Block block, ServerWorld level, BlockPos pos, BlockState state, DragonType type);
+            BlockState set(Block block, ServerWorld world, BlockPos pos, BlockState state, DragonType type);
         }
 
         public static final Setter SETTER_DRAGON_EEG = (block, level, pos, state, type) -> {

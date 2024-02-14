@@ -12,6 +12,7 @@ import net.minecraft.util.registry.Registry;
 import static net.dragonmounts.DragonMounts.MOD_ID;
 
 public class DMEntities {
+    public static final Identifier TAMEABLE_DRAGON_ID = new Identifier(MOD_ID, "dragon");
     public static final EntityType<HatchableDragonEggEntity> HATCHABLE_DRAGON_EGG = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(MOD_ID, "dragon_egg"),
@@ -24,7 +25,7 @@ public class DMEntities {
     );
     public static final EntityType<TameableDragonEntity> TAMEABLE_DRAGON = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(MOD_ID, "dragon"),
+            TAMEABLE_DRAGON_ID,
             FabricEntityTypeBuilder.<TameableDragonEntity>createMob()
                     .entityFactory(TameableDragonEntity::construct)
                     .defaultAttributes(TameableDragonEntity::createAttributes)

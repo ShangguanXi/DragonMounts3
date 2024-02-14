@@ -418,7 +418,7 @@ public abstract class TameableDragonEntity extends TameableEntity implements IDr
     }
 
     @Override
-    public void onPassengerLookAround(Entity passenger) {
+    public void updatePassengerPosition(Entity passenger) {
         int index = this.getPassengerList().indexOf(passenger);
         if (index >= 0) {
             Vec3d pos = this.getDragonType().passengerOffset.apply(index, this.isInSittingPose())
@@ -622,7 +622,7 @@ public abstract class TameableDragonEntity extends TameableEntity implements IDr
     }
 
     @Override
-    public ILivingEntityData finalizeSpawn(IServerWorld level, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable NbtCompound compound) {
+    public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable NbtCompound compound) {
         //noinspection DataFlowIssue
         this.getAttribute(EntityAttributes.GENERIC_FOLLOW_RANGE).addPermanentModifier(new AttributeModifier("Random spawn bonus", this.random.nextGaussian() * 0.05D, AttributeModifier.Operation.MULTIPLY_BASE));
         this.setLeftHanded(this.random.nextFloat() < 0.05F);

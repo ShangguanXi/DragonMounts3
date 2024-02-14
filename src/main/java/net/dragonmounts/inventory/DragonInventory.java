@@ -257,6 +257,6 @@ public class DragonInventory implements Inventory, NamedScreenHandlerFactory, Ex
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buffer) {
-        buffer.writeVarInt(this.dragon.getEntityId());
+        this.dragon.writeId(buffer);
     }
 }

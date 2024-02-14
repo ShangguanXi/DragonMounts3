@@ -10,10 +10,13 @@
     "MatchToolLootConditionSerializerMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
-    "ServerWorldMixin"
+    "ServerWorldMixin",
+    "SServerPlayNetworkHandlerMixin"
   ],
   "client": [
+    "CameraMixin",
     "ChatScreenMixin",
+    "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
     "CreativeInventoryScreenMixin",
     "HeadFeatureRendererMixin",

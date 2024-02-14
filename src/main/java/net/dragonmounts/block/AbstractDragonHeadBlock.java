@@ -42,8 +42,8 @@ public abstract class AbstractDragonHeadBlock extends BlockWithEntity implements
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltips, TooltipContext context) {
-        tooltips.add(this.variant.type.getName());
+    public void appendTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(this.variant.type.getName());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.dragonmounts.network;
 
+import net.dragonmounts.api.IDragonFood;
 import net.dragonmounts.capability.ArmorEffectManager;
 import net.dragonmounts.capability.IArmorEffectManager.Provider;
 import net.dragonmounts.client.ClientDragonEntity;
@@ -7,12 +8,14 @@ import net.dragonmounts.entity.dragon.DragonLifeStage;
 import net.dragonmounts.entity.dragon.HatchableDragonEggEntity;
 import net.dragonmounts.init.DMSounds;
 import net.dragonmounts.registry.CooldownCategory;
+import net.dragonmounts.util.DragonFood;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
@@ -21,6 +24,7 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("unused")
 public class ClientHandler {
+    private static final IDragonFood DEFAULT_DRAGON_FOOD_IMPL = (dragon, player, stack, hand) -> {};
     public static void handleArmorRiposte(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buffer, PacketSender sender) {
         int id = buffer.readVarInt(), flag = buffer.readVarInt();
         client.execute(() -> {
@@ -89,6 +93,21 @@ public class ClientHandler {
             Entity entity = client.world.getEntityById(id);
             if (entity instanceof ClientDragonEntity) {
                 ((ClientDragonEntity) entity).handleAgeSync(age, stage);
+            }
+        });
+    }
+
+    public static void handleFeedDragon(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buffer, PacketSender sender) {
+        int id = buffer.readVarInt(), age = buffer.readVarInt();
+        DragonLifeStage stage = DragonLifeStage.byId(buffer.readVarInt());
+        Item item = Item.byRawId(buffer.readVarInt());
+        client.execute(() -> {
+            //noinspection DataFlowIssue
+            Entity entity = client.world.getEntityById(id);
+            if (entity instanceof ClientDragonEntity) {
+                ClientDragonEntity dragon = (ClientDragonEntity) entity;
+                ((ClientDragonEntity) entity).handleAgeSync(age, stage);
+                DragonFood.get(item, DEFAULT_DRAGON_FOOD_IMPL).act(dragon, item);
             }
         });
     }

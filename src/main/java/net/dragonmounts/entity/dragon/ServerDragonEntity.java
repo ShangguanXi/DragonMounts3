@@ -253,8 +253,8 @@ public class ServerDragonEntity extends TameableDragonEntity {
     }
 
     @Override
-    public void onStruckByLightning(ServerWorld level, LightningEntity lightning) {
-        super.onStruckByLightning(level, lightning);
+    public void onStruckByLightning(ServerWorld world, LightningEntity lightning) {
+        super.onStruckByLightning(world, lightning);
         addOrMergeEffect(this, StatusEffects.STRENGTH, 700, 0, false, true, true);//35s
         DragonType current = this.getDragonType();
         if (current == DragonTypes.SKELETON) {
@@ -333,7 +333,7 @@ public class ServerDragonEntity extends TameableDragonEntity {
     }
 
     public final void openInventory(ServerPlayerEntity player) {
-        //NetworkHooks.openGui(player, this.inventory, this::writeId);
+        player.openHandledScreen(this.inventory);
     }
 
     public final PacketByteBuf syncAgePacket() {

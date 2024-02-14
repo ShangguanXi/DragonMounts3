@@ -3,6 +3,7 @@ package net.dragonmounts.client;
 import net.dragonmounts.api.DragonScaleArmorSuit;
 import net.dragonmounts.block.HatchableDragonEggBlock;
 import net.dragonmounts.client.gui.DragonCoreScreen;
+import net.dragonmounts.client.gui.DragonInventoryScreen;
 import net.dragonmounts.client.render.DragonEggRenderer;
 import net.dragonmounts.client.render.block.DragonCoreRenderer;
 import net.dragonmounts.client.render.block.DragonHeadRenderer;
@@ -13,6 +14,7 @@ import net.dragonmounts.entity.dragon.TameableDragonEntity;
 import net.dragonmounts.init.*;
 import net.dragonmounts.item.DragonScaleBowItem;
 import net.dragonmounts.item.DragonScaleShieldItem;
+import net.dragonmounts.item.DragonSpawnEggItem;
 import net.dragonmounts.network.ClientHandler;
 import net.dragonmounts.registry.DragonType;
 import net.dragonmounts.registry.DragonVariant;
@@ -27,6 +29,7 @@ import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPickBlockGatherCallback;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.fabricmc.fabric.impl.client.rendering.ArmorProviderExtensions;
+import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.minecraft.client.item.ModelPredicateProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -54,7 +57,9 @@ public class DragonMountsClient implements ClientModInitializer {
                     );
                 }
                 if (entity instanceof TameableDragonEntity) {
-                    //TODO Dragon Spawn Egg
+                    return new ItemStack(
+                            ((TameableDragonEntity) entity).getDragonType().getInstance(DragonSpawnEggItem.class, DMItems.ENDER_DRAGON_SPAWN_EGG)
+                    );
                 }
             }
             return ItemStack.EMPTY;
@@ -80,8 +85,13 @@ public class DragonMountsClient implements ClientModInitializer {
                 ((ArmorProviderExtensions) suit.leggings).fabric_setArmorTextureProvider(provider);
                 ((ArmorProviderExtensions) suit.boots).fabric_setArmorTextureProvider(provider);
             }
+            DragonSpawnEggItem egg = type.getInstance(DragonSpawnEggItem.class, null);
+            if (egg != null) {
+                ColorProviderRegistryImpl.ITEM.register(($, index) -> egg.getColor(index), egg);
+            }
         }
         ScreenRegistry.register(DMScreenHandlers.DRAGON_CORE, DragonCoreScreen::new);
+        ScreenRegistry.register(DMScreenHandlers.DRAGON_INVENTORY, DragonInventoryScreen::new);
         BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_CORE, DragonCoreRenderer::new);
         BlockEntityRendererRegistry.INSTANCE.register(DMBlockEntities.DRAGON_HEAD, DragonHeadRenderer::new);
         BuiltinItemRendererRegistry.INSTANCE.register(DMBlocks.DRAGON_CORE, DragonCoreRenderer.ITEM_RENDERER);
@@ -99,5 +109,6 @@ public class DragonMountsClient implements ClientModInitializer {
         registerGlobalReceiver(SYNC_COOLDOWN_PACKET_ID, ClientHandler::handleCooldownSync);
         registerGlobalReceiver(SHAKE_DRAGON_EGG_PACKET_ID, ClientHandler::handleEggShake);
         registerGlobalReceiver(SYNC_DRAGON_AGE_PACKET_ID, ClientHandler::handleAgeSync);
+        registerGlobalReceiver(FEED_DRAGON_PACKET_ID, ClientHandler::handleFeedDragon);
     }
 }

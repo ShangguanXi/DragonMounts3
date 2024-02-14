@@ -28,20 +28,20 @@ public class EntityUtil extends EntityType<Entity> {//to access protected method
         super(a, b, c, d, e, f, g, h, i, j);
     }
 
-    public static void finalizeSpawn(ServerWorld level, Entity entity, BlockPos pos, SpawnReason reason, EntityData data, NbtCompound tag, boolean yOffset, boolean extraOffset) {
+    public static void finalizeSpawn(ServerWorld world, Entity entity, BlockPos pos, SpawnReason reason, EntityData data, NbtCompound tag, boolean yOffset, boolean extraOffset) {
         double offset;
         if (yOffset) {
             entity.setPos(pos.getX() + 0.5D, (pos.getY() + 1), pos.getZ() + 0.5D);
-            offset = getOriginY(level, pos, extraOffset, entity.getBoundingBox());
+            offset = getOriginY(world, pos, extraOffset, entity.getBoundingBox());
         } else {
             offset = 0.0D;
         }
-        entity.refreshPositionAndAngles(pos.getX() + 0.5D, pos.getY() + offset, pos.getZ() + 0.5D, MathHelper.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
+        entity.refreshPositionAndAngles(pos.getX() + 0.5D, pos.getY() + offset, pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.random.nextFloat() * 360.0F), 0.0F);
         if (entity instanceof MobEntity) {
             MobEntity mobentity = (MobEntity) entity;
             mobentity.headYaw = mobentity.yaw;
             mobentity.bodyYaw = mobentity.yaw;
-            mobentity.initialize(level, level.getLocalDifficulty(mobentity.getBlockPos()), reason, data, tag);
+            mobentity.initialize(world, world.getLocalDifficulty(mobentity.getBlockPos()), reason, data, tag);
             mobentity.playAmbientSound();
         }
     }
@@ -102,10 +102,10 @@ public class EntityUtil extends EntityType<Entity> {//to access protected method
     }
 
     public static <T extends Entity> T loadScores(T entity, NbtCompound compound) {
-        World level = entity.world;
-        Scoreboard scoreboard = level.getScoreboard();
+        World world = entity.world;
+        Scoreboard scoreboard = world.getScoreboard();
         String scoreboardName = entity.getEntityName();
-        Map<ScoreboardObjective, ScoreboardPlayerScore> existingScores = level.getScoreboard().getPlayerObjectives(scoreboardName);
+        Map<ScoreboardObjective, ScoreboardPlayerScore> existingScores = world.getScoreboard().getPlayerObjectives(scoreboardName);
         NbtCompound scores;
         ScoreboardObjective objective;
         ScoreboardPlayerScore score;
@@ -134,16 +134,16 @@ public class EntityUtil extends EntityType<Entity> {//to access protected method
     }
 
     public static <T extends Entity> T loadScoreboard(T entity, NbtCompound compound) {
-        World level = entity.world;
-        Scoreboard scoreboard = level.getScoreboard();
+        World world = entity.world;
+        Scoreboard scoreboard = world.getScoreboard();
         String scoreboardName = entity.getEntityName();
-        Map<ScoreboardObjective, ScoreboardPlayerScore> existingScores = level.getScoreboard().getPlayerObjectives(scoreboardName);
+        Map<ScoreboardObjective, ScoreboardPlayerScore> existingScores = world.getScoreboard().getPlayerObjectives(scoreboardName);
         NbtCompound scores;
         ScoreboardObjective objective;
         ScoreboardPlayerScore score;
         // net.minecraft.entity.LivingEntity.readAdditionalSaveData
         if (compound.contains("Team", 8)) {
-            scoreboard.addPlayerToTeam(scoreboardName, level.getScoreboard().getPlayerTeam(compound.getString("Team")));
+            scoreboard.addPlayerToTeam(scoreboardName, world.getScoreboard().getPlayerTeam(compound.getString("Team")));
         }
         if (compound.contains("Scores")) {
             scores = compound.getCompound("Scores");
