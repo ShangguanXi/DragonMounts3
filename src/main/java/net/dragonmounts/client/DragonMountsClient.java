@@ -101,6 +101,7 @@ public class DragonMountsClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(DMEntities.HATCHABLE_DRAGON_EGG, (dispatcher, context) -> new DragonEggRenderer(dispatcher));
         EntityRendererRegistry.INSTANCE.register(DMEntities.TAMEABLE_DRAGON, (dispatcher, context) -> new TameableDragonRenderer(dispatcher));
         registerPacketHandler();
+        DMKeyBindings.register();
     }
 
     private static void registerPacketHandler() {

@@ -35,7 +35,6 @@ public class DragonMounts implements ModInitializer {
         TrackedDataHandlerRegistry.register(CarriageType.SERIALIZER);
         TrackedDataHandlerRegistry.register(DragonType.SERIALIZER);
         TrackedDataHandlerRegistry.register(DragonVariant.SERIALIZER);
-        DMKeyBindings.register();
         CommandRegistrationCallback.EVENT.register(DMCommand::register);
         ServerPlayerEvents.COPY_FROM.register((player, priorPlayer, $) -> ArmorEffectManager.onPlayerClone(player, priorPlayer));
         AttackEntityCallback.EVENT.register(DMArmorEffects::meleeChanneling);
